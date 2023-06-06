@@ -1,0 +1,2306 @@
+
+# Algorithm: Encoding and Decoding using Chaotic System and Kaktovik's Mark Numerals
+
+
+**Client:** React, Redux, TailwindCSS
+
+**Server:** Node, Express
+
+To test and run the code outside of the data table, you would typically need the following files:
+
+1. Python script file (.py): This is where you'll write the Python code. You can use any text editor or integrated development environment (IDE) to create and edit this file. Save it with a `.py` extension, such as `table_generator.py`.
+
+2. EmojiCode grouping data file (JSON): This file contains the EmojiCode grouping information you provided earlier. Save it as a JSON file, such as `emoji_groups.json`. Make sure the JSON data is formatted correctly.
+
+3. Run script file: Optionally, you can create a separate script file that executes the main Python script. This can be helpful if you want to set up any additional configurations or perform other actions before running the main script.
+
+Once you have these files ready, follow these steps to test the code:
+
+1. Place the Python script file (`table_generator.py`) and the EmojiCode grouping data file (`emoji_groups.json`) in the same directory.
+
+2. Open a command-line terminal or shell and navigate to the directory where the files are located.
+
+3. Run the Python script by executing the command `python table_generator.py`. This will execute the script and generate the data table.
+
+4. Check the output in the terminal. The data table will be displayed with the meta tag, number, Unicode, decimal, alphabet, HEX code, XY plot, and Emoji Group columns.
+
+By following these steps, you should be able to test the code and see the generated data table in the terminal or command-line interface. Remember to adjust the file names and paths if you choose to use different names or file locations.
+## Authors
+
+- [@mcochranca](https://www.github.com/mcochranca)
+
+
+## Tech Stack
+
+**Client:** React, Redux, TailwindCSS
+
+**Server:** Node, Express
+
+To test and run the code outside of the data table, you would typically need the following files:
+
+1. Python script file (.py): This is where you'll write the Python code. You can use any text editor or integrated development environment (IDE) to create and edit this file. Save it with a `.py` extension, such as `table_generator.py`.
+
+2. EmojiCode grouping data file (JSON): This file contains the EmojiCode grouping information you provided earlier. Save it as a JSON file, such as `emoji_groups.json`. Make sure the JSON data is formatted correctly.
+
+3. Run script file: Optionally, you can create a separate script file that executes the main Python script. This can be helpful if you want to set up any additional configurations or perform other actions before running the main script.
+
+Once you have these files ready, follow these steps to test the code:
+
+1. Place the Python script file (`table_generator.py`) and the EmojiCode grouping data file (`emoji_groups.json`) in the same directory.
+
+2. Open a command-line terminal or shell and navigate to the directory where the files are located.
+
+3. Run the Python script by executing the command `python table_generator.py`. This will execute the script and generate the data table.
+
+4. Check the output in the terminal. The data table will be displayed with the meta tag, number, Unicode, decimal, alphabet, HEX code, XY plot, and Emoji Group columns.
+
+By following these steps, you should be able to test the code and see the generated data table in the terminal or command-line interface. Remember to adjust the file names and paths if you choose to use different names or file locations.
+## Map K-E
+Certainly! Here's an example of how you can use the `kaktovik_to_emoji` function to map Kaktovik numerals to their corresponding emoji combinations:
+
+```python
+def generate_emoji_combinations():
+    base_emojis = ['0️⃣', '1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣', '9️⃣']
+    combinations = []
+    
+    # Generate combinations for numerals 0 to 9
+    for numeral in range(10):
+        combinations.append(base_emojis[numeral])
+    
+    # Generate combinations for numerals 10 to 19
+    for tens in range(1, 2):
+        for units in range(10):
+            combination = base_emojis[tens] + base_emojis[units]
+            combinations.append(combination)
+    
+    return combinations
+
+def kaktovik_to_emoji(numeral):
+    emoji_combinations = generate_emoji_combinations()
+    return emoji_combinations[numeral]
+
+# Map Kaktovik numerals to emoji combinations
+kaktovik_numerals = [1, 5, 10, 15, 19]
+for numeral in kaktovik_numerals:
+    emoji_combination = kaktovik_to_emoji(numeral)
+    print(f"Kaktovik numeral {numeral}: {emoji_combination}")
+```
+
+In this example, we have a list `kaktovik_numerals` containing some Kaktovik numerals. We iterate over each numeral in the list and use the `kaktovik_to_emoji` function to map it to its corresponding emoji combination. The function retrieves the emoji combinations from the `generate_emoji_combinations` function, and the result is printed to the console.
+
+You can modify the `kaktovik_numerals` list to include any Kaktovik numerals you want to map to their emoji combinations.
+## Parameters
+
+PARAM
+build number generator code or random .tov generator (short for kaktovics)
+
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+def decimal_to_binary(decimal):
+    return bin(decimal)[2:]
+
+def decimal_to_hex(decimal):
+    return hex(decimal)[2:]
+
+def decimal_to_octal(decimal):
+    return oct(decimal)[2:]
+
+def decimal_to_fraction(decimal):
+    from fractions import Fraction
+    return str(Fraction(decimal).limit_denominator())
+
+def decimal_to_kaktovik(decimal):
+    return decimal_to_base(decimal, 20)
+
+def decimal_to_base(decimal, base):
+    digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    result = ""
+    while decimal > 0:
+        result = digits[decimal % base] + result
+        decimal = decimal // base
+    return result
+
+def generate_combinations(kaktovik_numeral):
+    # Generate combinations for the current Kaktovik numeral
+    combinations = []
+    for i in range(20):
+        emoji_combination = f"{kaktovik_numeral} + {kaktovik_numeral} = {decimal_to_kaktovik(i + 2)}"
+        combinations.append(emoji_combination)
+    return combinations
+
+def generate_table():
+    emoji_groups = [
+        '😀 Joy',
+        '😢 Sadness',
+        '😃 Excitement',
+        '😄 Joy',
+        '😆 Excitement',
+        '😂 Joy',
+        '😊 Joy',
+        '😁 Joy',
+        '😅 Excitement',
+        '😇 Joy',
+        '😉 Joy',
+        '😊 Joy',
+        '😋 Excitement',
+        '😎 Excitement',
+        '😍 Joy',
+        '😘 Joy',
+        '😚 Joy',
+        '😗 Joy',
+        '😙 Joy',
+        '😜 Excitement'
+    ]
+
+    table = []
+    limit = 20
+    current_value = 0x1D2C0  # Starting Unicode value
+
+    for i in range(limit):
+        meta_tag = hex(0x1D2C0 + i).upper()  # Calculate the meta tag based on the incremental formula
+        number = '#' + str(i)  # Generate the corresponding number
+
+        row = [meta_tag, number]
+        for j in range(limit):
+            unicode = chr(current_value)  # Calculate the corresponding Unicode
+            kaktovic_pair = hex(current_value + 1)[2:].upper()  # Calculate the corresponding Kaktovic added pair
+            current_value += 2
+
+            # Generate the Kaktovik math results
+            kaktovik_decimal = j + 1
+            kaktovik_hex = hex(kaktovik_decimal)[2:]
+            x = -240 + (j * 30)
+            y = 107 - (j * 12)
+
+            emoji_group = emoji_groups[j]
+
+            row.append({
+                'unicode': unicode,
+                'decimal': kaktovik_decimal,
+                'alphabet': chr(ord('A') + j),
+                'hex_code': kaktovik_hex,
+                'xy_plot': f'({x}, {y})',
+                'emoji_group': emoji_group,
+                'binary': decimal_to_binary(kaktovik_decimal),
+                'hexadecimal': decimal_to_hex(kaktovik_decimal),
+                'octal': decimal_to_octal(kaktovik_decimal),
+                'fraction': decimal_to_fraction(kaktovik_decimal),
+                'kaktovik': decimal_to_kaktovik(kaktovik_decimal)
+            })
+
+        table.append(row)  # Add the values to the table
+
+    return table
+
+def generate_kaktovik_table():
+    kaktovik_unicode = ["𝋀", "𝋁", "𝋂", "𝋃", "𝋄", "𝋅", "𝋆", "𝋇", "𝋈", "𝋉", "𝋊", "𝋋", "𝋌", "𝋍", "𝋎", "𝋏", "𝋐", "𝋑", "𝋒", "𝋓"]
+    kaktovik_table = []
+
+    for i in range(20):
+        # Calculate the corresponding hexadecimal color code
+        color_ratio = i / 19
+        hex_code = format(int(color_ratio * 16777215), '06x')
+        rgb = hex_to_rgb(hex_code)
+
+        # Convert the decimal number to a Kaktovik numeral
+        kaktovik_numeral = kaktovik_unicode[i]
+
+        # Generate combinations for the current Kaktovik numeral
+        combinations = generate_combinations(kaktovik_numeral)
+
+        kaktovik_table.append({
+            "Decimal Value": i,
+            "Kaktovik Unicode": kaktovik_unicode[i],
+            "RGB Color": rgb,
+            "Combinations": combinations
+        })
+
+    return kaktovik_table
+
+def hex_to_rgb(hex_code):
+    # Convert hexadecimal color code to RGB
+    r = int(hex_code[:2], 16)
+    g = int(hex_code[2:4], 16)
+    b = int(hex_code[4:], 16)
+    return (r, g, b)
+
+# Generate the main table
+table = generate_table()
+
+# Generate the kaktovik table
+kaktovik_table = generate_kaktovik_table()
+
+# Print the main table
+print("Main Table:")
+print("| Meta Tag | Number | Unicode | Decimal | Alphabet | HEX Code | XY Plot | Emoji Group | Binary | Hexadecimal | Octal | Fraction | Kaktovik |")
+print("|----------|--------|---------|---------|----------|----------|---------|-------------|--------|-------------|-------|----------|----------|")
+for row in table:
+    meta_tag = row[0]
+    number = row[1]
+    for entry in row[2:]:
+        unicode = entry['unicode']
+        decimal = entry['decimal']
+        alphabet = entry['alphabet']
+        hex_code = entry['hex_code']
+        xy_plot = entry['xy_plot']
+        emoji_group = entry['emoji_group']
+        binary = entry['binary']
+        hexadecimal = entry['hexadecimal']
+        octal = entry['octal']
+        fraction = entry['fraction']
+        kaktovik = entry['kaktovik']
+        print(f"| {meta_tag} | {number} | {unicode} | {decimal} | {alphabet} | {hex_code} | {xy_plot} | {emoji_group} | {binary} | {hexadecimal} | {octal} | {fraction} | {kaktovik} |")
+
+# Print the kaktovik table
+print("\nKaktovik Table:")
+print("| Decimal Value | Kaktovik Unicode | RGB Color | Combinations |")
+print("|---------------|------------------|-----------|--------------|")
+for entry in kaktovik_table:
+    decimal_value = entry["Decimal Value"]
+    kaktovik_unicode = entry["Kaktovik Unicode"]
+    rgb_color = entry["RGB Color"]
+    combinations = entry["Combinations"]
+    print(f"| {decimal_value} | {kaktovik_unicode} | {rgb_color} | {combinations} |")
+
+# Generate a plot of the Kaktovik table
+x = np.arange(20)
+colors = [entry["RGB Color"] for entry in kaktovik_table]
+combinations_count = [len(entry["Combinations"]) for entry in kaktovik_table]
+
+plt.bar(x, combinations_count, color=colors)
+plt.xlabel("Decimal Value")
+plt.ylabel("Number of Combinations")
+plt.title("Kaktovik Numeral Combinations")
+plt.xticks(x)
+plt.show()
+import random
+
+def lorenz_chaos_equations(x, y, z, sigma, rho, beta):
+    dx = sigma * (y - x)
+    dy = x * (rho - z) - y
+    dz = x * y - beta * z
+    return dx, dy, dz
+
+def chaotic_encoding(input_text, x0, y0, z0, sigma, rho, beta):
+    encoded_text = ''
+    x = x0
+    y = y0
+    z = z0
+
+    for char in input_text:
+        dx, dy, dz = lorenz_chaos_equations(x, y, z, sigma, rho, beta)
+        x += dx
+        y += dy
+        z += dz
+
+        chaotic_value = (x + y + z) % 1  # Obtain a value between 0 and 1
+        kaktovik_index = int(chaotic_value * 20)  # Map chaotic value to Kaktovik index
+
+        encoded_text += kaktovik_table[kaktovik_index]["Kaktovik Unicode"]
+
+    return encoded_text
+
+def chaotic_decoding(encoded_text, x0, y0, z0, sigma, rho, beta):
+    decoded_text = ''
+    x = x0
+    y = y0
+    z = z0
+
+    for char in encoded_text:
+        dx, dy, dz = lorenz_chaos_equations(x, y, z, sigma, rho, beta)
+        x += dx
+        y += dy
+        z += dz
+
+        chaotic_value = (x + y + z) % 1  # Obtain a value between 0 and 1
+        kaktovik_index = int(chaotic_value * 20)  # Map chaotic value to Kaktovik index
+
+        kaktovik_unicode = kaktovik_table[kaktovik_index]["Kaktovik Unicode"]
+        if char == kaktovik_unicode:
+            decoded_text += char
+        else:
+            # Handle decoding errors here
+            pass
+
+    return decoded_text
+
+# Define the initial conditions for the chaotic system
+x0 = 0
+y0 = 1
+z0 = 20
+sigma = 10
+rho = 28
+beta = 2.667
+
+# Define the input text to encode
+input_text = "Hello, world!"
+
+# Generate the Kaktovik table
+kaktovik_table = generate_kaktovik_table()
+
+# Encode the input text using the chaotic system
+encoded_text = chaotic_encoding(input_text, x0, y0, z0, sigma, rho, beta)
+
+# Decode the encoded text back into the original text using the chaotic system
+decoded_text = chaotic_decoding(encoded_text, x0, y0, z0, sigma, rho, beta)
+
+print("Input Text:", input_text)
+print("Encoded Text:", encoded_text)
+print("Decoded Text:", decoded_text)
+# Run the script
+
+# Define the initial conditions for the chaotic system
+x0 = 0
+y0 = 1
+z0 = 20
+sigma = 10
+rho = 28
+beta = 2.667
+
+# Define the input text to encode
+input_text = "Hello, world!"
+
+# Generate the Kaktovik table
+kaktovik_table = generate_kaktovik_table()
+
+# Encode the input text using the chaotic system
+encoded_text = chaotic_encoding(input_text, x0, y0, z0, sigma, rho, beta)
+
+# Decode the encoded text back into the original text using the chaotic system
+decoded_text = chaotic_decoding(encoded_text, x0, y0, z0, sigma, rho, beta)
+
+print("Input Text:", input_text)
+print("Encoded Text:", encoded_text)
+print("Decoded Text:", decoded_text)
+# Run the script
+
+# Define the initial conditions for the chaotic system
+x0 = 0
+y0 = 1
+z0 = 20
+sigma = 10
+rho = 28
+beta = 2.667
+
+# Define the input text to encode
+input_text = "Hello, world!"
+
+# Generate the Kaktovik table
+kaktovik_table = generate_kaktovik_table()
+
+# Encode the input text using the chaotic system
+encoded_text = chaotic_encoding(input_text, x0, y0, z0, sigma, rho, beta)
+
+# Decode the encoded text back into the original text using the chaotic system
+decoded_text = chaotic_decoding(encoded_text, x0, y0, z0, sigma, rho, beta)
+
+print("Input Text:", input_text)
+print("Encoded Text:", encoded_text)
+print("Decoded Text:", decoded_text)
+
+# Generate a plot of the Kaktovik table
+x = np.arange(20)
+colors = [entry["RGB Color"] for entry in kaktovik_table]
+combinations_count = [len(entry["Combinations"]) for entry in kaktovik_table]
+
+plt.bar(x, combinations_count, color=colors)
+plt.xlabel("Decimal Value")
+plt.ylabel("Number of Combinations")
+plt.title("Kaktovik Numeral Combinations")
+plt.xticks(x)
+plt.show()
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+def decimal_to_binary(decimal):
+    return bin(decimal)[2:]
+
+def decimal_to_hex(decimal):
+    return hex(decimal)[2:]
+
+def decimal_to_octal(decimal):
+    return oct(decimal)[2:]
+
+def decimal_to_fraction(decimal):
+    from fractions import Fraction
+    return str(Fraction(decimal).limit_denominator())
+
+def decimal_to_kaktovik(decimal):
+    return decimal_to_base(decimal, 20)
+
+def decimal_to_base(decimal, base):
+    digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    result = ""
+    while decimal > 0:
+        result = digits[decimal % base] + result
+        decimal = decimal // base
+    return result
+
+def generate_combinations(kaktovik_numeral):
+    # Generate combinations for the current Kaktovik numeral
+    combinations = []
+    for i in range(20):
+        emoji_combination = f"{kaktovik_numeral} + {kaktovik_numeral} = {decimal_to_kaktovik(i + 2)}"
+        combinations.append(emoji_combination)
+    return combinations
+
+def generate_table():
+    emoji_groups = [
+        '😀 Joy',
+        '😢 Sadness',
+        '😃 Excitement',
+        '😄 Joy',
+        '😆 Excitement',
+        '😂 Joy',
+        '😊 Joy',
+        '😁 Joy',
+        '😅 Excitement',
+        '😇 Joy',
+        '😉 Joy',
+        '😊 Joy',
+        '😋 Excitement',
+        '😎 Excitement',
+        '😍 Joy',
+        '😘 Joy',
+        '😚 Joy',
+        '😗 Joy',
+        '😙 Joy',
+        '😜 Excitement'
+    ]
+
+    table = []
+    limit = 20
+    current_value = 0x1D2C0  # Starting Unicode value
+
+    for i in range(limit):
+        meta_tag = hex(0x1D2C0 + i).upper()  # Calculate the meta tag based on the incremental formula
+        number = '#' + str(i)  # Generate the corresponding number
+
+        row = [meta_tag, number]
+        for j in range(limit):
+            unicode = chr(current_value)  # Calculate the corresponding Unicode
+            kaktovic_pair = hex(current_value + 1)[2:].upper()  # Calculate the corresponding Kaktovic added pair
+            current_value += 2
+
+            # Generate the Kaktovik math results
+            kaktovik_decimal = j + 1
+            kaktovik_hex = hex(kaktovik_decimal)[2:]
+            x = -240 + (j * 30)
+            y = 107 - (j * 12)
+
+            emoji_group = emoji_groups[j]
+
+            row.append({
+                'unicode': unicode,
+                'decimal': kaktovik_decimal,
+                'alphabet': chr(ord('A') + j),
+                'hex_code': kaktovik_hex,
+                'xy_plot': f'({x}, {y})',
+                'emoji_group': emoji_group,
+                'binary': decimal_to_binary(kaktovik_decimal),
+                'hexadecimal': decimal_to_hex(kaktovik_decimal),
+                'octal': decimal_to_octal(kaktovik_decimal),
+                'fraction': decimal_to_fraction(kaktovik_decimal),
+                'kaktovik': decimal_to_kaktovik(kaktovik_decimal)
+            })
+
+        table.append(row)  # Add the values to the table
+
+    return table
+
+def generate_kaktovik_table():
+    kaktovik_unicode = ["𝋀", "𝋁", "𝋂", "𝋃", "𝋄", "𝋅", "𝋆", "𝋇", "𝋈", "𝋉", "𝋊", "𝋋", "𝋌", "𝋍", "𝋎", "𝋏", "𝋐", "𝋑", "𝋒", "𝋓"]
+    kaktovik_table = []
+
+    for i in range(20):
+        # Calculate the corresponding hexadecimal color code
+        color_ratio = i / 19
+        hex_code = format(int(color_ratio * 16777215), '06x')
+        rgb = hex_to_rgb(hex_code)
+
+        # Convert the decimal number to a Kaktovik numeral
+        kaktovik_numeral = kaktovik_unicode[i]
+
+        # Generate combinations for the current Kaktovik numeral
+        combinations = generate_combinations(kaktovik_numeral)
+
+        kaktovik_table.append({
+            "Decimal Value": i,
+            "Kaktovik Unicode": kaktovik_unicode[i],
+            "RGB Color": rgb,
+            "Combinations": combinations
+        })
+
+    return kaktovik_table
+
+def hex_to_rgb(hex_code):
+    # Convert hexadecimal color code to RGB
+    r = int(hex_code[:2], 16)
+    g = int(hex_code[2:4], 16)
+    b = int(hex_code[4:], 16)
+    return (r, g, b)
+
+# Generate the main table
+table = generate_table()
+
+# Generate the kaktovik table
+kaktovik_table = generate_kaktovik_table()
+
+# Print the main table
+print("Main Table:")
+print("| Meta Tag | Number | Unicode | Decimal | Alphabet | HEX Code | XY Plot | Emoji Group | Binary | Hexadecimal | Octal | Fraction | Kaktovik |")
+print("|----------|--------|---------|---------|----------|----------|---------|-------------|--------|-------------|-------|----------|----------|")
+for row in table:
+    meta_tag = row[0]
+    number = row[1]
+    for entry in row[2:]:
+        unicode = entry['unicode']
+        decimal = entry['decimal']
+        alphabet = entry['alphabet']
+        hex_code = entry['hex_code']
+        xy_plot = entry['xy_plot']
+        emoji_group = entry['emoji_group']
+        binary = entry['binary']
+        hexadecimal = entry['hexadecimal']
+        octal = entry['octal']
+        fraction = entry['fraction']
+        kaktovik = entry['kaktovik']
+        print(f"| {meta_tag} | {number} | {unicode} | {decimal} | {alphabet} | {hex_code} | {xy_plot} | {emoji_group} | {binary} | {hexadecimal} | {octal} | {fraction} | {kaktovik} |")
+
+# Print the kaktovik table
+print("\nKaktovik Table:")
+print("| Decimal Value | Kaktovik Unicode | RGB Color | Combinations |")
+print("|---------------|------------------|-----------|--------------|")
+for entry in kaktovik_table:
+    decimal_value = entry["Decimal Value"]
+    kaktovik_unicode = entry["Kaktovik Unicode"]
+    rgb_color = entry["RGB Color"]
+    combinations = entry["Combinations"]
+    print(f"| {decimal_value} | {kaktovik_unicode} | {rgb_color} | {combinations} |")
+
+# Generate a plot of the Kaktovik table
+x = np.arange(20)
+colors = [entry["RGB Color"] for entry in kaktovik_table]
+combinations_count = [len(entry["Combinations"]) for entry in kaktovik_table]
+
+plt.bar(x, combinations_count, color=colors)
+plt.xlabel("Decimal Value")
+plt.ylabel("Number of Combinations")
+plt.title("Kaktovik Numeral Combinations")
+plt.xticks(x)
+plt.show()
+
+## Kaktovis encrypt
+
+import numpy as np
+
+# Define the Kaktovik numerals as base symbols
+kaktovik_numerals = {
+    1: '👆',  # Unicode representation of Kaktovik numeral 1
+    2: '✌️',  # Unicode representation of Kaktovik numeral 2
+    3: '🤟',  # Unicode representation of Kaktovik numeral 3
+    # ... and so on
+}
+
+# Define the aperiodic tiling pattern
+tiling_pattern = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]  # Example tiling pattern
+
+def rotate_3d_tiling(tiling_pattern, angle):
+    # Rotate the 3D tiling pattern
+    # Apply the necessary rotation transformation to the tiling pattern
+    # based on the specified angle
+    rotated_tiling = tiling_pattern  # Placeholder, replace with actual rotation implementation
+    return rotated_tiling
+
+def kaktovics_encrypt(plaintext, tiling_pattern, rotation_angle):
+    # Convert plaintext to binary representation
+    binary_text = ' '.join(format(ord(char), '08b') for char in plaintext)
+
+    # Generate chaotic values
+    iterations = len(binary_text)
+    x0 = 0
+    y0 = 1
+    z0 = 20
+    chaotic_values = chaotic_map(x0, y0, z0, iterations)
+
+    # Apply chaotic encryption
+    encrypted_text = ''
+    for i, char in enumerate(binary_text):
+        chaotic_value = chaotic_values[i]
+        binary_encrypted = bin(int(char, 2) ^ int(chaotic_value))  # XOR encryption
+        encrypted_text += binary_encrypted[2:].zfill(8)  # Pad binary with zeros to 8 bits
+
+    # Map encrypted binary to Kaktovik numerals
+    encrypted_numerals = [kaktovik_numerals[int(numeral)] for numeral in encrypted_text]
+
+    # Rotate the Kaktovik numerals using the 3D tiling pattern and rotation angle
+    rotated_numerals = rotate_3d_tiling(encrypted_numerals, rotation_angle)
+
+    return ''.join(rotated_numerals)
+
+# Example usage
+plaintext = 'Hello, world!'
+encrypted_text = kaktovics_encrypt(plaintext, tiling_pattern, rotation_angle)
+print(f'Encrypted text: {encrypted_text}')
+
+## Chaos
+import random
+
+# Step 1: Randomization
+def randomize_tov_coded_data(tov_data):
+    seed = random.randint(0, 100)  # Generate a random seed
+    random.seed(seed)  # Set the seed for consistent shuffling
+    randomized_data = list(tov_data)
+    random.shuffle(randomized_data)  # Apply random permutation
+    return ''.join(randomized_data)
+
+# Step 2: Encoding
+def encode_with_chaos(tov_data, chaotic_params, chaotic_init_conditions, mark_numerals_hierarchy):
+    chaotic_vars = chaotic_init_conditions
+    encoded_data = ''
+    for char in tov_data:
+        # Apply chaotic system to the character using the chaotic equations
+        chaotic_value = chaotic_equations(chaotic_vars, chaotic_params)
+        # Map chaotic value to corresponding Kaktovik's Mark Numeral from the hierarchy
+        mark_numeral = map_to_mark_numeral(chaotic_value, mark_numerals_hierarchy)
+        encoded_data += mark_numeral
+        # Update the chaotic variables for the next iteration
+        chaotic_vars = update_chaotic_vars(chaotic_vars, chaotic_params)
+    return encoded_data
+
+# Step 3: Decoding
+def decode_with_chaos(encoded_data, chaotic_params, chaotic_init_conditions, mark_numerals_hierarchy):
+    chaotic_vars = chaotic_init_conditions
+    decoded_data = ''
+    for mark_numeral in encoded_data:
+        # Map Kaktovik's Mark Numeral back to corresponding chaotic value using the hierarchy
+        chaotic_value = map_from_mark_numeral(mark_numeral, mark_numerals_hierarchy)
+        # Apply chaotic system inverse equations to recover the original character
+        char = inverse_chaotic_equations(chaotic_value, chaotic_vars, chaotic_params)
+        decoded_data += char
+        # Update the chaotic variables for the next iteration
+        chaotic_vars = update_chaotic_vars(chaotic_vars, chaotic_params)
+    return decoded_data
+
+# Step 4: Output
+def main():
+    tov_data = "Your .tov coded data"  # Provide the .tov coded data
+    chaotic_params = {...}  # Define the parameters for the chaotic system equations
+    chaotic_init_conditions = {...}  # Define the initial conditions for the chaotic system
+    mark_numerals_hierarchy = {...}  # Define the Kaktovik's Mark Numerals hierarchy and mappings
+
+    randomized_data = randomize_tov_coded_data(tov_data)
+    encoded_data = encode_with_chaos(randomized_data, chaotic_params, chaotic_init_conditions, mark_numerals_hierarchy)
+    decoded_data = decode_with_chaos(encoded_data, chaotic_params, chaotic_init_conditions, mark_numerals_hierarchy)
+
+    print("Original .tov Coded Data:", tov_data)
+    print("Randomized .tov Coded Data:", randomized_data)
+    print("Encoded Data:", encoded_data)
+    print("Decoded .tov Coded Data:", decoded_data)
+
+# Function for populating a table
+def populate_table():
+    table = []
+    # Your table population logic here
+    # For example:
+    for i in range(10):
+        row = []
+        for j in range(10):
+            row.append((i, j))
+        table.append(row)
+    return table
+
+# Call the main function
+if __name__ == '__main__':
+    table = populate_table()
+    print("Table:", table)
+    main()
+
+## NLCA Test
+The principles outlined in the provided text describe the key generation, encryption, and decryption processes of a proposed algorithm called New Lightweight Cryptographic Algorithm (NLCA). The NLCA is a block cipher that operates on 16-byte (128-bit) blocks of data.
+
+Key Generation:
+- The 128-bit cipher key (Kc) is split into two 64-bit segments, right and left.
+- Each segment is further divided into 4-bit segments.
+- The 4-bit segments undergo a shift row operation to create input for the f-function.
+- The f-function utilizes substitution to generate a cipher key (Kc) using the input segments.
+- The f-function output is used to create eight arrays, referred to as key matrices (M1 to M8).
+- The arrays generated from the f-function represent the round keys (K1 to K8).
+- The arrays are rotated to create KM1 to KM8.
+- The fifth key (KK5) is obtained by performing an XOR operation on the four round keys (KK1 to KK4).
+
+Encryption Process:
+- The plaintext message is divided into 16-byte blocks.
+- Each block is further divided into four sub-blocks of 32 bits.
+- Initial operations are performed on each sub-block using the round keys (KK1 to KKK).
+- XOR and XNOR operations are applied between sub-blocks and the round keys.
+- The resulting values are fed into the F-Function, which includes substitution (S-boxes), AND, OR, and left shift operations.
+- The F-Function output is XORed with other sub-blocks to generate intermediate results.
+- Switching operations occur between the sub-blocks to create confusion and diffusion.
+- The same steps are repeated for multiple rounds to increase complexity.
+- The encrypted text is obtained by combining the results of the encryption rounds.
+
+Decryption Process:
+- The decryption process is the reverse of the encryption process.
+- The encrypted key is split into right (R0) and left (L0) segments.
+- The XOR operation between R0 and L0 produces the first key (K1).
+- The R0 and K1 combination generates the decryption key.
+- The decryption process uses the same steps as encryption, but in reverse order.
+
+The NLCA algorithm aims to provide security, efficiency, and reliability for data encryption in cloud computing environments. It utilizes a combination of Feistel and SP architectural methods to achieve high security with lower computational complexity. The algorithm's performance is compared with other cryptographic algorithms such as DES, AES, HIGHT, Blowfish, and LED, demonstrating its effectiveness in terms of security and processing time.
+
+It is worth mentioning that the code implementation for the NLCA algorithm is not provided in the text. To implement the NLCA algorithm in code, you would need to follow the described processes and operations using a programming language of your choice.
+## LED Test
+The provided algorithm describes the key generation process for LED (Lightweight Encryption Algorithm) using the 3-D Lorenz chaotic system. The algorithm generates a 64-bit key based on the chaotic behavior of the Lorenz system.
+
+Here's a step-by-step breakdown of the algorithm:
+
+1. Initialize the variables: 𝑥0 = 0, 𝑦0 = 1, 𝑧0 = 20, σ = 10, ρ = 28, β = 2.667. These values are the parameters and initial conditions of the Lorenz chaotic system.
+
+2. Iterate from n = 1 to 32:
+   a. Calculate 𝑥𝑛 using the equation 𝑥𝑛 = 𝑎(𝑦0 − 𝑥0), where 𝑎 is a constant.
+   b. Calculate 𝑦𝑛 using the equation 𝑦𝑛 = (σ − 𝑧0)𝑥0 − 𝑦0.
+   c. Calculate 𝑧𝑛 using the equation 𝑧𝑛 = 𝑦0 − 𝑏𝑧0, where 𝑏 is another constant.
+   d. Convert 𝑥𝑛, 𝑦𝑛, and 𝑧𝑛 to strings and select the first four decimal digits.
+   e. Convert the selected decimal digits to binary using the dec2bin function.
+
+3. Concatenate the binary strings obtained from step 2: 𝑜𝑢𝑡𝑑𝑥𝑛, 𝑜𝑢𝑡𝑑𝑦𝑛, and 𝑜𝑢𝑡𝑑𝑧𝑛.
+
+4. Concatenate the three resulting binary strings from step 3 to obtain a 64-bit key.
+
+5. Return the generated key.
+
+It's important to note that the algorithm relies on the behavior of the Lorenz chaotic system to generate pseudo-random numbers, which are then converted to a binary key. The constants 𝑎 and 𝑏 in the Lorenz equations determine the characteristics of the chaotic behavior.
+
+To implement this algorithm in code, you would need to use a programming language of your choice and define the necessary functions, such as dec2bin and str2num, to perform the required conversions.
+
+Algorithm 2: LED key generation using 3-D Lorenz
+chaos theory (64-bit)
+Input: 𝑥0 = 0, 𝑦0 = 1, 𝑧0 = 20, σ=10, ρ=28, β=2.667 //
+as a parameter and initial conditions of the Lorenz
+chaotic system
+Output: Key (64-bit)
+1: For n= 1 to 32
+2: 𝑥𝑛 = 𝑎(𝑦0 − 𝑥0) // generate pseudo-random
+numbers using Lorenz chaos equations
+3: 𝑦𝑛 = (σ − 𝑧0) 𝑥0 − 𝑦0
+4: 𝑧𝑛 = 𝑦0 − 𝑏𝑧0
+5: 𝑥𝑛 = 𝑛𝑢𝑚2𝑠𝑡𝑟 (𝑥𝑛 (𝑛, 1), 5) //convert numbers to
+string
+6: 𝑦𝑛 = 𝑛𝑢𝑚2𝑠𝑡𝑟 (𝑦𝑛 (𝑛, 2), 5)
+7: 𝑧𝑛 = 𝑛𝑢𝑚2𝑠𝑡𝑟 (𝑧𝑛 (𝑛, 3), 5)
+8: 𝑜𝑢𝑡𝑑𝑥n = dec2bin(str2num(𝑥n (4)) //convert decimal
+numbers to binary
+9: 𝑜𝑢𝑡𝑑𝑦n = dec2bin(str2num(𝑦n (4))
+10: 𝑜𝑢𝑡𝑑𝑧n = dec2bin(str2num( 𝑧n (4))
+11: End For
+12: Key =𝑜𝑢𝑡𝑑𝑥n+𝑜𝑢𝑡𝑑𝑦n+𝑜𝑢𝑡𝑑𝑧n //apply concatenate
+process after converting the results to binary
+13: Return Key(64-bit)
+## Kaktovis Decrypt
+
+import numpy as np
+
+# Define the Kaktovik numerals as base symbols
+kaktovik_numerals = {
+    1: '👆',  # Unicode representation of Kaktovik numeral 1
+    2: '✌️',  # Unicode representation of Kaktovik numeral 2
+    3: '🤟',  # Unicode representation of Kaktovik numeral 3
+    # ... and so on
+}
+
+# Define the aperiodic tiling pattern
+tiling_pattern = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]  # Example tiling pattern
+
+def rotate_3d_tiling(tiling_pattern, angle):
+    # Rotate the 3D tiling pattern
+    # Apply the necessary rotation transformation to the tiling pattern
+    # based on the specified angle
+    rotated_tiling = tiling_pattern  # Placeholder, replace with actual rotation implementation
+    return rotated_tiling
+
+def inverse_rotate_3d_tiling(tiling_pattern, angle):
+    # Inverse rotation of the 3D tiling pattern
+    # Apply the necessary inverse rotation transformation to the tiling pattern
+    # based on the specified angle
+    inverse_rotated_tiling = tiling_pattern  # Placeholder, replace with actual inverse rotation implementation
+    return inverse_rotated_tiling
+
+def kaktovics_encrypt(plaintext, tiling_pattern, rotation_angle):
+    # Convert plaintext to binary representation
+    binary_text = ' '.join(format(ord(char), '08b') for char in plaintext)
+
+    # Generate chaotic values
+    iterations = len(binary_text)
+    x0 = 0
+    y0 = 1
+    z0 = 20
+    chaotic_values = chaotic_map(x0, y0, z0, iterations)
+
+    # Apply chaotic encryption
+    encrypted_text = ''
+    for i, char in enumerate(binary_text):
+        chaotic_value = chaotic_values[i]
+        binary_encrypted = bin(int(char, 2) ^ int(chaotic_value))  # XOR encryption
+        encrypted_text += binary_encrypted[2:].zfill(8)  # Pad binary with zeros to 8 bits
+
+    # Map encrypted binary to Kaktovik numerals
+    encrypted_numerals = [kaktovik_numerals[int(numeral)] for numeral in encrypted_text]
+
+    # Rotate the Kaktovik numerals using the 3D tiling pattern and rotation angle
+    rotated_numerals = rotate_3d_tiling(encrypted_numerals, rotation_angle)
+
+    return ''.join(rotated_numerals)
+
+def kaktovics_decrypt(encrypted_text, tiling_pattern, rotation_angle):
+    # Inverse rotate the Kaktovik numerals using the 3D tiling pattern and rotation angle
+    rotated_numerals = inverse_rotate_3d_tiling(list(encrypted_text), rotation_angle)
+
+    # Map rotated numerals back to binary representation
+    binary_text = ''
+    for numeral in rotated_numerals:
+        for key, value in kaktovik_numerals.items():
+            if value == numeral:
+                binary_text += format(key, '04b')
+                break
+
+    # Apply chaotic decryption
+    decrypted_text = ''
+    chaotic_values = chaotic_map(0, 1, 20, len(binary_text))
+    for i, char in enumerate(binary_text):
+        chaotic_value = chaotic_values[i]
+        binary_decrypted = bin(int(char, 2) ^ int(chaotic_value))  # XOR decryption
+        decrypted_text += chr(int(binary_decrypted, 2))
+
+    return decrypted_text
+
+# Example usage
+plaintext = 'Hello, world!'
+rotation_angle = 45
+
+encrypted_text = kaktovics_encrypt(plaintext, tiling_pattern, rotation_angle)
+print(f'Encrypted text: {encrypted_text}')
+
+decrypted_text = kaktovics_decrypt(encrypted_text, tiling_pattern, rotation_angle)
+print(f'Decrypted text: {decrypted_text}')
+
+## .TOV Algorith?
+Here's an algorithm that incorporates the randomization, encoding, and decoding of .tov coded data using a chaotic system. The algorithm also takes into account the visually embedded language encoded into the Kaktovik's Mark Numerals hierarchy.
+
+```
+Algorithm: Randomize, Encode, and Decode .tov Coded Data with Chaos and Kaktovik's Mark Numerals
+
+Input:
+- Original .tov coded data
+- Chaos system parameters and initial conditions
+- Kaktovik's Mark Numerals hierarchy
+
+Output:
+- Decoded .tov coded data
+
+Step 1: Randomization
+1. Generate a random seed for the chaotic system.
+2. Apply a random permutation or shuffle algorithm to the .tov coded data, using the generated seed.
+
+Step 2: Encoding
+3. Initialize the variables for the chaotic system with the given parameters and initial conditions.
+4. Iterate over each character in the randomized .tov coded data:
+   a. Apply the chaotic system to the character using the chaotic equations.
+   b. Map the resulting chaotic value to a corresponding Kaktovik's Mark Numeral from the hierarchy.
+   c. Replace the character in the .tov coded data with the mapped Kaktovik's Mark Numeral.
+
+Step 3: Decoding
+5. Initialize the variables for the chaotic system with the same parameters and initial conditions used in the encoding step.
+6. Iterate over each character in the encoded .tov coded data:
+   a. Map the Kaktovik's Mark Numeral back to the corresponding chaotic value using the hierarchy.
+   b. Apply the chaotic system inverse equations to recover the original character.
+   c. Replace the Kaktovik's Mark Numeral in the .tov coded data with the recovered character.
+
+Step 4: Output
+7. Return the decoded .tov coded data.
+
+End of Algorithm
+```
+
+To implement this algorithm, you would need to define the chaotic system equations, the Kaktovik's Mark Numerals hierarchy, and the corresponding mappings between chaotic values and Kaktovik's Mark Numerals. 
+
+import random
+
+# Step 1: Randomization
+def randomize_tov_coded_data(tov_data):
+    seed = random.randint(0, 100)  # Generate a random seed
+    random.seed(seed)  # Set the seed for consistent shuffling
+    randomized_data = list(tov_data)
+    random.shuffle(randomized_data)  # Apply random permutation
+    return ''.join(randomized_data)
+
+# Step 2: Encoding
+def encode_with_chaos(tov_data, chaotic_params, chaotic_init_conditions, mark_numerals_hierarchy):
+    chaotic_vars = chaotic_init_conditions
+    encoded_data = ''
+    for char in tov_data:
+        # Apply chaotic system to the character using the chaotic equations
+        chaotic_value = chaotic_equations(chaotic_vars, chaotic_params)
+        # Map chaotic value to corresponding Kaktovik's Mark Numeral from the hierarchy
+        mark_numeral = map_to_mark_numeral(chaotic_value, mark_numerals_hierarchy)
+        encoded_data += mark_numeral
+        # Update the chaotic variables for the next iteration
+        chaotic_vars = update_chaotic_vars(chaotic_vars, chaotic_params)
+    return encoded_data
+
+# Step 3: Decoding
+def decode_with_chaos(encoded_data, chaotic_params, chaotic_init_conditions, mark_numerals_hierarchy):
+    chaotic_vars = chaotic_init_conditions
+    decoded_data = ''
+    for mark_numeral in encoded_data:
+        # Map Kaktovik's Mark Numeral back to corresponding chaotic value using the hierarchy
+        chaotic_value = map_from_mark_numeral(mark_numeral, mark_numerals_hierarchy)
+        # Apply chaotic system inverse equations to recover the original character
+        char = inverse_chaotic_equations(chaotic_value, chaotic_vars, chaotic_params)
+        decoded_data += char
+        # Update the chaotic variables for the next iteration
+        chaotic_vars = update_chaotic_vars(chaotic_vars, chaotic_params)
+    return decoded_data
+
+# Step 4: Output
+def main():
+    tov_data = "Your .tov coded data"  # Provide the .tov coded data
+    chaotic_params = {...}  # Define the parameters for the chaotic system equations
+    chaotic_init_conditions = {...}  # Define the initial conditions for the chaotic system
+    mark_numerals_hierarchy = {...}  # Define the Kaktovik's Mark Numerals hierarchy and mappings
+
+    randomized_data = randomize_tov_coded_data(tov_data)
+    encoded_data = encode_with_chaos(randomized_data, chaotic_params, chaotic_init_conditions, mark_numerals_hierarchy)
+    decoded_data = decode_with_chaos(encoded_data, chaotic_params, chaotic_init_conditions, mark_numerals_hierarchy)
+
+    print("Original .tov Coded Data:", tov_data)
+    print("Randomized .tov Coded Data:", randomized_data)
+    print("Encoded Data:", encoded_data)
+    print("Decoded .tov Coded Data:", decoded_data)
+
+# Function for populating a table (Replace with your own function)
+def populate_table():
+    # Your table population logic here
+    pass
+
+# Call the main function
+if __name__ == '__main__':
+    populate_table()
+    main()
+
+
+## Kaktovic (.tov) generator
+To build a random .tov generator for Kaktovics, you can follow these steps:
+
+1. Define the range of numbers you want to generate Kaktovic symbols for.
+
+2. Write a function to generate a random number within the desired range. You can use the `random` module in Python to achieve this.
+
+3. Create a loop to generate a specified number of Kaktovic symbols. Within the loop, call the random number generator function and convert the generated number to its corresponding Kaktovic symbol using the functions provided in your existing code.
+
+4. Store the generated Kaktovic symbols in a list or any other data structure that suits your needs.
+
+5. You can further enhance the generator by incorporating any additional features or requirements specific to your use case. For example, you can add functionality to save the generated symbols to a file or display them in a visually appealing format.
+
+Here's an example implementation of a random .tov generator:
+
+```python
+import random
+
+def generate_random_kaktovics(num_symbols):
+    kaktovics = []
+    for _ in range(num_symbols):
+        decimal = random.randint(1, 20)
+        kaktovic = decimal_to_kaktovik(decimal)
+        kaktovics.append(kaktovic)
+    return kaktovics
+
+num_symbols = 10  # Specify the number of Kaktovic symbols to generate
+generated_symbols = generate_random_kaktovics(num_symbols)
+
+# Print the generated symbols
+for symbol in generated_symbols:
+    print(symbol)
+```
+
+This code generates `num_symbols` random Kaktovic symbols and prints them one by one. You can modify the value of `num_symbols` to generate more or fewer symbols as needed.
+
+Feel free to customize the code according to your specific requirements and incorporate it into your existing codebase or application.
+## Algorithm
+
+Provably-Secure LED Block Cipher Diffusion and Confusion Based... Informatica 47 (2023) 105–114 111
+shows that it increases by roughly 0.4570 more than
+the LED algorithm.
+• Approximate Entropy Test: According to NIST
+testing, the suggested technique outperforms the LED
+algorithm, as shown in Table 2. , This increase is
+almost 0.0706 higher than the LED algorithm.
+• Cumulative Sums (Cusums) Test: The proposed
+technique, which increases by almost 0.7143 more
+than the LED algorithm, according to NIST testing, is
+generally higher than the LED, as indicated in Table
+2.
+• Random Excursions Variant Test: As indicated in
+Table 2. , the proposed technique is generally superior
+to the LED, which increases by almost 0.1662 higher
+than the LED algorithm, according to tests NIST
+suite.
+• Random Excursions Test: The suggested technique
+often outperforms the LED, as indicated in Table 2. ,
+which rises by approximately 0.0371 higher than the
+LED algorithm, based on the NIST tests suite.
+• Runs Test: According to NIST testing, the suggested
+technique generally outperforms the LED algorithm,
+as shown in Table 2. , This increase is almost 0.1821
+higher than the LED algorithm.
+• Longest-Run-of-Ones Test: The suggested method
+often outperforms the LED, as indicated in Table 2. ,
+According to NIST testing, it increases by roughly
+0.7723 more than the LED algorithm.
+• Binary Matrix Rank Test: The proposed method is
+generally less than the LED, as indicated in Table 2. ,
+which decreases by nearly 0.0977 compared to the
+LED algorithm, according to NIST tests.
+• Discrete Fourier Transform Test: The proposed
+technique is generally superior to the LED, as
+demonstrated in Table 2. , which increases by almost
+0.8696 times more than the LED algorithm, according
+to NIST tests.
+• Non-overlapping Template Matching Test: The
+proposed technique is often less than the LED, as
+indicated in Table 2. , This decreases by around
+0.6661 compared to the LED algorithm, as
+determined by NIST tests.
+Remark 3: 13 NIST statistical tests out of 15 indicate
+that the LED with the key generated by using three
+dimensional Lorenz chaotic system outperforms the LED
+cipher, as shown in Table 2. , given the highly
+randomized and nonlinear output ciphertext generated by
+the proposed scheme.
+5.2 Computation cost
+As noted in Table 3., the encryption and decryption times
+are very close because of our use of computationally
+inexpensive key generation based on the 3-D Lorenz
+chaotic method. This additional unnoticed time in the
+encryption and decryption processes has little effect
+compared to the increased security of data encrypted by
+random chaos based on the 3-D Lorenz chaotic map.
+From Table 3., we observe that there is a slight
+difference in encryption and decryption computation
+costs between the LED and our proposed scheme. For
+example, it takes about 0.0372 ms in the encryption
+process when the block size is 16000 bits, as registered in
+the above table, which is unremarkable compared with
+gaining high randomization. Besides, we attain high-
+randomization ciphertext to resist known attacks.
+6 Conclusion
+LED as a block cipher was broken and needed to meet
+the security requirements, and it is no longer as safe as it
+once was. As a result, LED requires greater randomness,
+confusion, and diffusion. This paper describes a modified
+LED that adopted a three-dimensional Lorenz chaotic
+map to achieve a satisfactory level of confusion and
+diffusion. The difference in computational complexity is
+slight and almost not noticed between the proposed
+method and LED. On the other hand, our approach has
+achieved an impressive security increase, enabling it to
+prevent attacks. The proposed method improves security
+by using more randomization with key generation, and it
+could be used with other techniques like a lightweight
+block cipher. Key generation raises the complexity of the
+algorithm and adds greater flexibility. LED has been
+modified to be high-security and robust enough to use as
+a lightweight block cipher on devices with limited
+resources. The performance of random ciphers was
+evaluated using 15 statistical NIST tests suite developed
+to assess pseudo-random numbers in cryptographic
+systems applications. It successfully bypassed the
+randomness of the proposed method. According to the
+statistical NIST test suite, the performance acquired by
+Table 2: Statistical NIST test suite
+NIST tests LED Proposed
+algorithm
+Frequency (Monobit) 0.1563 0.8561
+Frequency within a Block 0.2720 0.7713
+Cumulative Sums (Cusums) 0.1956 0.9099
+Runs 0.0051 0.1872
+Longest-Run-of-Ones 0.4338 0.8685
+Rank test 0.8264 0.7288
+Discrete Fourier Transform 0.1304 1.0000
+Non-overlapping Template 0.7656 0.0994
+Overlapping Template 0.6507 0.9883
+Maurer's “Universal’’ 0.0313 0.0593
+Approximate Entropy 0.1352 0.2058
+Random Excursions 0.5499 0.5869
+Random Excursions Variant 0.2892 0.4554
+Serial 0.1089 0.5659
+Linear Complexity 0.0862 0.8585
+Table 3: Comparison computation time cost in (ms)
+Size in
+block
+(64-bit)
+Size
+in bits
+LED
+encryption
+time
+Proposed
+algorithm
+encryption
+time
+LED
+decryption
+time
+Proposed
+algorithm
+decryption
+time
+1 64 0.1140 0.1914 0.0584 0.0591
+10 640 0.3682 0.4484 0.3700 0.3771
+100 6400 2.4569 2.5844 3.3927 3.3980
+250 16000 6.0363 6.0735 8.4943 8.4292
+112 Informatica 47 (2023) 105–114 H.M. Al-Saadi et al.
+the proposed method increases by nearly 0.3003, higher
+than that reached by the traditional LED in terms of data
+confidentiality and integrity.
+References
+[1] H. Wu and H. Wu, “Research on Computer Network
+Information Security Problems and Prevention
+Based on Wireless Sensor Network,” in 2021 IEEE
+Asia-Pacific Conference on Image Processing,
+Electronics and Computers (IPEC), 2021, pp. 1015–
+1018. doi: 10.1109/IPEC51340.2021.9421303.
+[2] M. A. Latif, M. Bin Ahmad, and M. K. Khan, “A
+Review on Key Management and Lightweight
+Cryptography for IoT,” in 2020 Global Conference
+on Wireless and Optical Technologies (GCWOT),
+2020, pp. 1–7. doi:
+10.1109/GCWOT49901.2020.9391613.
+[3] S. S. Dhanda, B. Singh, and P. Jindal, “Lightweight
+cryptography: a solution to secure IoT,” Wirel. Pers.
+Commun., vol. 112, no. 3, pp. 1947–1980, 2020, doi:
+10.1007/s11277-020-07134-3.
+[4] R. Anusha, M. J. Dileep Kumar, V. S. Shetty, and N.
+Prajwal Hegde, “Symmetric Key Algorithm in
+Computer security: A Review,” Proc. 4th Int. Conf.
+Electron. Commun. Aerosp. Technol. ICECA 2020,
+pp. 765–769, 2020, doi:
+10.1109/ICECA49313.2020.9297547.
+[5] H. H. Al-badrei and I. S. Alshawi, “Improvement of
+RC4 Security Algorithm,” Adv. Mech., vol. 9, no. 3,
+pp. 1467–1476, 2021.
+[6] K. Gupta, D. Gupta, S. K. Prasad, and P. Johri, “A
+Review on Cryptography based Data Security
+Techniques for the Cloud Computing,” in 2021
+International Conference on Advance Computing
+and Innovative Technologies in Engineering,
+ICACITE 2021, 2021, pp. 1039–1044. doi:
+10.1109/ICACITE51222.2021.9404568.
+[7] V. A. Thakor, M. A. Razzaque, and M. R. A.
+Khandaker, “Lightweight Cryptography Algorithms
+for Resource-Constrained IoT Devices: A Review,
+Comparison and Research Opportunities,” IEEE
+Access, vol. 9, pp. 28177–28193, 2021, doi:
+10.1109/ACCESS.2021.3052867.
+[8] G. Hatzivasilis, K. Fysarakis, I. Papaefstathiou, and
+C. Manifavas, “A review of lightweight block
+ciphers,” J. Cryptogr. Eng., vol. 8, no. 2, pp. 141–
+184, 2018, doi: 10.1007/s13389-017-0160-y.
+[9] G. Bansod, N. Raval, and N. Pisharoty,
+“Implementation of a new lightweight encryption
+design for embedded security,” IEEE Trans. Inf.
+Forensics Secur., vol. 10, no. 1, pp. 142–151, 2015,
+doi: 10.1109/TIFS.2014.2365734.
+[10] W. Diehl, A. Abdulgadir, J. P. Kaps, and K. Gaj,
+“Comparing the cost of protecting selected
+lightweight block ciphers against differential power
+analysis in low-cost FPGAs,” Computers, vol. 7,
+no. 2, 2018, doi: 10.3390/computers7020028.
+[11] H. Mestiri, Y. Salah, and A. A. Baroudi, “A Secure
+Network Interface for on-Chip Systems,” Proc. -
+STA 2020 2020 20th Int. Conf. Sci. Tech. Autom.
+Control Comput. Eng., pp. 90–94, 2020, doi:
+10.1109/STA50679.2020.9329296.
+[12] K. Jeong, H. Kang, C. Lee, J. Sung, and S. Hong,
+“Biclique Cryptanalysis of Lightweight Block
+Ciphers PRESENT , Piccolo and LED,” IACR
+Cryptol. ePrint Arch., vol. 2012, p. 621, 2012.
+[13] T. Isobe and K. Shibutani, “Security analysis of the
+lightweight block ciphers XTEA, LED and
+Piccolo,” Lect. Notes Comput. Sci. (including
+Subser. Lect. Notes Artif. Intell. Lect. Notes
+Bioinformatics), vol. 7372 LNCS, pp. 71–86, 2012,
+doi: 10.1007/978-3-642-31448-3_6.
+[14] W. Diehl, A. Abdulgadir, J. P. Kaps, and K. Gaj,
+“Side-channel resistant soft core processor for
+lightweight block ciphers,” 2017 Int. Conf.
+Reconfigurable Comput. FPGAs, ReConFig 2017,
+vol. 2018-Janua, pp. 1–8, 2018, doi:
+10.1109/RECONFIG.2017.8279819.
+[15] S. Subramanian, M. Mozaffari-Kermani, R.
+Azarderakhsh, and M. Nojoumian, “Reliable
+Hardware Architectures for Cryptographic Block
+Ciphers LED and HIGHT,” IEEE Trans. Comput.
+Des. Integr. Circuits Syst., vol. 36, no. 10, pp.
+1750–1758, 2017, doi:
+10.1109/TCAD.2017.2661811.
+[16] A. Ali, M. A. Khan, R. K. Ayyasamy, and M.
+Wasif, “A novel systematic byte substitution
+method to design strong bijective substitution box
+(S-box) using piece-wise-linear chaotic map,”
+PeerJ Comput. Sci., vol. 8, pp. 1–38, 2022, doi:
+10.7717/peerj-cs.940.
+[17] M. Hamdi, J. Miri, and B. Moalla, “Hybrid
+encryption algorithm (HEA) based on chaotic
+system,” Soft Comput., vol. 25, no. 3, pp. 1847–
+1858, 2021, doi: 10.1007/s00500-020-05258-z.
+[18] R. Anandkumar and R. Kalpana, “Analyzing of
+chaos based encryption with Lorenz and Henon
+map,” Proc. Int. Conf. I-SMAC (IoT Soc. Mobile,
+Anal. Cloud), I-SMAC 2018, pp. 204–208, 2019,
+doi: 10.1109/I-SMAC.2018.8653652.
+[19] C. D. McDermott and A. Petrovski, “Investigation
+of computational intelligence techniques for
+intrusion detection in wireless sensor networks,”
+Int. J. Comput. Networks Commun., vol. 9, no. 4,
+pp. 45–56, 2017, doi: 10.5121/ijcnc.2017.9404.
+[20] R. Iqbal, F. Doctor, B. More, S. Mahmu, and U.
+Yousuf, “Faiyaz Doctor,” Technol. Forecast. Soc.
+Change, pp. 1–25, 2018.
+[21] A. H. Jabbar and I. S. Alshawi, “Spider monkey
+optimization routing protocol for wireless sensor
+networks.,” Int. J. Electr. \& Comput. Eng., vol. 11,
+no. 3, 2021, doi: 10.11591/ijece.v11i3.pp2432-
+2442.
+[22] A. Abdaoui, A. Erbad, A. K. Al-Ali, A. Mohamed,
+and M. Guizani, “Fuzzy Elliptic Curve
+Cryptography for Authentication in Internet of
+Things,” IEEE Internet Things J., 2022, doi:
+10.1109/JIOT.2021.3121350.
+[23] R. Wang and W. Ji, “Computational Intelligence
+for Information Security: A Survey,” IEEE Trans.
+Emerg. Top. Comput. Intell., vol. 4, no. 5, pp. 616–
+Provably-Secure LED Block Cipher Diffusion and Confusion Based... Informatica 47 (2023) 105–114 113
+629, 2020, doi: 10.1109/TETCI.2019.2923426.
+[24] A. N. Abdulraheem and B. M. Nema, “Secure IoT
+Model Based on PRESENT Lightweight Modified
+and Chaotic Key Generator,” Proc. 2020 1st Inf.
+Technol. to Enhanc. E-Learning other Appl. Conf.
+IT-ELA 2020, pp. 12–18, 2020, doi: 10.1109/IT-
+ELA50150.2020.9253079.
+[25] Z. M. J. Kubba and H. K. Hoomod, “A Hybrid
+Modified Lightweight Algorithm Combined of
+Two Cryptography Algorithms PRESENT and
+Salsa20 Using Chaotic System,” in 1st
+International Scientific Conference of Computer
+and Applied Sciences, CAS 2019, 2019, pp. 199–
+203. doi: 10.1109/CAS47993.2019.9075488.
+[26] M. Sharafi, F. Fotouhi-Ghazvini, M. Shirali, and M.
+Ghassemian, “A low power cryptography solution
+based on chaos theory in wireless sensor nodes,”
+IEEE Access, vol. 7, no. c, pp. 8737–8753, 2019,
+doi: 10.1109/ACCESS.2018.2886384.
+[27] L. Ding, C. Liu, Y. Zhang, and Q. Ding, “A new
+lightweight stream cipher based on chaos,”
+Symmetry (Basel)., vol. 11, no. 7, pp. 1–12, 2019,
+doi: 10.3390/sym11070853.
+[28] L. A. Muhalhal and I. S. Alshawi, “Improved
+Salsa20 Stream Cipher Diffusion Based on Random
+Chaotic Maps,” Informatica vol. 46, pp. 95–102,
+2022.
+[29] Z. Rahman, X. Yi, I. Khalil, and M. Sumi, “Chaos
+and Logistic Map based Key Generation Technique
+for AES-driven IoT Security,” International
+Conference on Heterogeneous Networking for
+Quality, Reliability, Security and Robustness, pp.
+177-193. Springer, Cham, 2021.
+[30] F. Dridi, S. El Assad, W. El Hadj Youssef, M.
+Machhout, and R. Lozi, “Design, Implementation,
+and Analysis of a Block Cipher Based on a Secure
+Chaotic Generator,” Appl. Sci., vol. 12, no. 19,
+2022, doi: 10.3390/app12199952.
+[31] N. Nguyen, L. Pham-Nguyen, M. B. Nguyen, and
+G. Kaddoum, “A Low Power Circuit Design for
+Chaos-Key Based Data Encryption,” IEEE Access,
+vol. 8, pp. 104432–104444, 2020, doi:
+10.1109/ACCESS.2020.2998395.
+[32] K. A. McKay, L. Bassham, M. S. Turan, and N.
+Mouha, “Report on lightweight cryptography,”
+Natl. Inst. Stand. Technol., vol. NISTIR 811, p. 26,
+2017, [Online]. Available:
+https://nvlpubs.nist.gov/nistpubs/ir/2017/NIST.IR.8
+114.pdf%0Ahttp://nvlpubs.nist.gov/nistpubs/ir/201
+7/NIST.IR.8114.pdf
+[33] J. Guo, T. Peyrin, A. Poschmann, and M. Robshaw,
+“The LED block cipher,” International workshop
+on cryptographic hardware and embedded systems,
+pp. 326-341. Springer, Berlin, Heidelberg, 2011.
+[34] T. Li, B. Du, and X. Liang, “Image Encryption
+Algorithm Based on Logistic and Two-
+Dimensional Lorenz,” IEEE Access, vol. 8, pp.
+13792–13805, 2020, doi:
+10.1109/ACCESS.2020.2966264.
+[35] E. Lorenz, “Deterministic Nonperiodic Flow,”
+Universality in Chaos. pp. 367–378, 2017. doi:
+10.1201/9780203734636-38.
+
+## Encoding and Decoding using Chaotic System and Kaktovik's Mark Numerals
+Based on our entire thread history, the next step could involve implementing the encoding and decoding algorithms using the chaotic system and the Kaktovik's Mark Numerals hierarchy. Here's a suggested algorithm for encoding and decoding data:
+
+Algorithm: Encoding and Decoding using Chaotic System and Kaktovik's Mark Numerals
+
+1. Define the chaotic system equations that will be used for generating pseudo-random numbers. You can use the Lorenz chaotic system equations mentioned earlier in our conversation.
+
+2. Create functions for encoding and decoding the data:
+   - The encoding function should take the input data and perform the following steps:
+     - Convert the data to the corresponding Kaktovik's Mark Numerals using the mappings between decimal values and Kaktovik numerals.
+     - Apply the chaotic system equations to generate pseudo-random numbers.
+     - Perform any necessary operations on the Kaktovik numerals using the generated pseudo-random numbers.
+     - Return the encoded data.
+
+   - The decoding function should take the encoded data and perform the reverse steps:
+     - Reverse any operations performed during encoding using the pseudo-random numbers.
+     - Convert the Kaktovik numerals back to their decimal representations.
+     - Return the decoded data.
+
+3. Test the encoding and decoding functions:
+   - Generate some sample data to encode.
+   - Encode the data using the encoding function.
+   - Decode the encoded data using the decoding function.
+   - Compare the original data with the decoded data to ensure accuracy.
+
+Remember to incorporate the code you have already written for generating the Kaktovik table and utilizing the chaotic system equations. You can integrate the encoding and decoding functions into your existing codebase or create separate functions specifically for this purpose.
+
+I hope this provides you with a direction for the next steps. Let me know if you have any further questions or if there's anything specific you'd like assistance with!
+## Tile Assignment
+
+To assign the Kaktovik numerals to square tiles of different sizes, you can follow these steps:
+
+1. Define the visual representation of the Kaktovik numerals: Determine how each Kaktovik numeral is visually represented. For example, you might use different arrangements of dots, lines, or other shapes to create the numerals.
+
+2. Determine the available tile shapes: Decide on the shapes and sizes of the square tiles you have available for the assignment. For example, you might have small square tiles, medium square tiles, and large square tiles.
+
+3. Assign numerals to tile sizes: Based on the visual representation of the Kaktovik numerals and the available tile shapes, assign each numeral to a corresponding tile size. For example, you might assign numeral 1 to the small square tile, numeral 2 to the medium square tile, and so on.
+
+4. Create a mapping or lookup table: Create a mapping or lookup table that associates each Kaktovik numeral with its corresponding tile size. This table will be used during the encryption and decryption processes to translate between the numerals and the tile sizes.
+
+Here's an example implementation in Python:
+
+```python
+def assign_tile_sizes():
+    # Define the visual representation of Kaktovik numerals
+    kaktovik_numerals = ["𝋀", "𝋁", "𝋂", "𝋃", "𝋄", "𝋅", "𝋆", "𝋇", "𝋈", "𝋉", "𝋊", "𝋋", "𝋌", "𝋍", "𝋎", "𝋏", "𝋐", "𝋑", "𝋒", "𝋓"]
+    
+    # Define the available tile shapes
+    tile_sizes = {
+        "𝋀": "small",
+        "𝋁": "medium",
+        "𝋂": "medium",
+        "𝋃": "large",
+        "𝋄": "large",
+        # ... assign the remaining numerals to tile sizes as needed
+    }
+    
+    # Create a mapping table
+    mapping_table = {numeral: tile_sizes[numeral] for numeral in kaktovik_numerals}
+    
+    return mapping_table
+
+# Example usage
+mapping_table = assign_tile_sizes()
+print(mapping_table)
+```
+
+In this example, the `assign_tile_sizes` function defines the visual representation of Kaktovik numerals and the available tile shapes. It then creates a mapping table that associates each Kaktovik numeral with its corresponding tile size. The resulting `mapping_table` can be used during the encryption and decryption processes to determine the appropriate tile size for each numeral.
+## Screenshots
+
+![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+def decimal_to_binary(decimal):
+    return bin(decimal)[2:]
+
+def decimal_to_hex(decimal):
+    return hex(decimal)[2:]
+
+def decimal_to_octal(decimal):
+    return oct(decimal)[2:]
+
+def decimal_to_fraction(decimal):
+    from fractions import Fraction
+    return str(Fraction(decimal).limit_denominator())
+
+def decimal_to_kaktovik(decimal):
+    return decimal_to_base(decimal, 20)
+
+def decimal_to_base(decimal, base):
+    digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    result = ""
+    while decimal > 0:
+        result = digits[decimal % base] + result
+        decimal = decimal // base
+    return result
+
+def generate_combinations(kaktovik_numeral):
+    # Generate combinations for the current Kaktovik numeral
+    combinations = []
+    for i in range(20):
+        emoji_combination = f"{kaktovik_numeral} + {kaktovik_numeral} = {decimal_to_kaktovik(i + 2)}"
+        combinations.append(emoji_combination)
+    return combinations
+
+def generate_table():
+    emoji_groups = [
+        '😀 Joy',
+        '😢 Sadness',
+        '😃 Excitement',
+        '😄 Joy',
+        '😆 Excitement',
+        '😂 Joy',
+        '😊 Joy',
+        '😁 Joy',
+        '😅 Excitement',
+        '😇 Joy',
+        '😉 Joy',
+        '😊 Joy',
+        '😋 Excitement',
+        '😎 Excitement',
+        '😍 Joy',
+        '😘 Joy',
+        '😚 Joy',
+        '😗 Joy',
+        '😙 Joy',
+        '😜 Excitement'
+    ]
+
+    table = []
+    limit = 20
+    current_value = 0x1D2C0  # Starting Unicode value
+
+    for i in range(limit):
+        meta_tag = hex(0x1D2C0 + i).upper()  # Calculate the meta tag based on the incremental formula
+        number = '#' + str(i)  # Generate the corresponding number
+
+        row = [meta_tag, number]
+        for j in range(limit):
+            unicode = chr(current_value)  # Calculate the corresponding Unicode
+            kaktovic_pair = hex(current_value + 1)[2:].upper()  # Calculate the corresponding Kaktovic added pair
+            current_value += 2
+
+            # Generate the Kaktovik math results
+            kaktovik_decimal = j + 1
+            kaktovik_hex = hex(kaktovik_decimal)[2:]
+            x = -240 + (j * 30)
+            y = 107 - (j * 12)
+
+            emoji_group = emoji_groups[j]
+
+            row.append({
+                'unicode': unicode,
+                'decimal': kaktovik_decimal,
+                'alphabet': chr(ord('A') + j),
+                'hex_code': kaktovik_hex,
+                'xy_plot': f'({x}, {y})',
+                'emoji_group': emoji_group,
+                'binary': decimal_to_binary(kaktovik_decimal),
+                'hexadecimal': decimal_to_hex(kaktovik_decimal),
+                'octal': decimal_to_octal(kaktovik_decimal),
+                'fraction': decimal_to_fraction(kaktovik_decimal),
+                'kaktovik': decimal_to_kaktovik(kaktovik_decimal)
+            })
+
+        table.append(row)  # Add the values to the table
+
+    return table
+
+def generate_kaktovik_table():
+    kaktovik_unicode = ["𝋀", "𝋁", "𝋂", "𝋃", "𝋄", "𝋅", "𝋆", "𝋇", "𝋈", "𝋉", "𝋊", "𝋋", "𝋌", "𝋍", "𝋎", "𝋏", "𝋐", "𝋑", "𝋒", "𝋓"]
+    kaktovik_table = []
+
+    for i in range(20):
+        # Calculate the corresponding hexadecimal color code
+        color_ratio = i / 19
+        hex_code = format(int(color_ratio * 16777215), '06x')
+        rgb = hex_to_rgb(hex_code)
+
+        # Convert the decimal number to a Kaktovik numeral
+        kaktovik_numeral = kaktovik_unicode[i]
+
+        # Generate combinations for the current Kaktovik numeral
+        combinations = generate_combinations(kaktovik_numeral)
+
+        kaktovik_table.append({
+            "Decimal Value": i,
+            "Kaktovik Unicode": kaktovik_unicode[i],
+            "RGB Color": rgb,
+            "Combinations": combinations
+        })
+
+    return kaktovik_table
+
+def hex_to_rgb(hex_code):
+    # Convert hexadecimal color code to RGB
+    r = int(hex_code[:2], 16)
+    g = int(hex_code[2:4], 16)
+    b = int(hex_code[4:], 16)
+    return (r, g, b)
+
+# Generate the main table
+table = generate_table()
+
+# Generate the kaktovik table
+kaktovik_table = generate_kaktovik_table()
+
+# Print the main table
+print("Main Table:")
+print("| Meta Tag | Number | Unicode | Decimal | Alphabet | HEX Code | XY Plot | Emoji Group | Binary | Hexadecimal | Octal | Fraction | Kaktovik |")
+print("|----------|--------|---------|---------|----------|----------|---------|-------------|--------|-------------|-------|----------|----------|")
+for row in table:
+    meta_tag = row[0]
+    number = row[1]
+    for entry in row[2:]:
+        unicode = entry['unicode']
+        decimal = entry['decimal']
+        alphabet = entry['alphabet']
+        hex_code = entry['hex_code']
+        xy_plot = entry['xy_plot']
+        emoji_group = entry['emoji_group']
+        binary = entry['binary']
+        hexadecimal = entry['hexadecimal']
+        octal = entry['octal']
+        fraction = entry['fraction']
+        kaktovik = entry['kaktovik']
+        print(f"| {meta_tag} | {number} | {unicode} | {decimal} | {alphabet} | {hex_code} | {xy_plot} | {emoji_group} | {binary} | {hexadecimal} | {octal} | {fraction} | {kaktovik} |")
+
+# Print the kaktovik table
+print("\nKaktovik Table:")
+print("| Decimal Value | Kaktovik Unicode | RGB Color | Combinations |")
+print("|---------------|------------------|-----------|--------------|")
+for entry in kaktovik_table:
+    decimal_value = entry["Decimal Value"]
+    kaktovik_unicode = entry["Kaktovik Unicode"]
+    rgb_color = entry["RGB Color"]
+    combinations = entry["Combinations"]
+    print(f"| {decimal_value} | {kaktovik_unicode} | {rgb_color} | {combinations} |")
+
+# Generate a plot of the Kaktovik table
+x = np.arange(20)
+colors = [entry["RGB Color"] for entry in kaktovik_table]
+combinations_count = [len(entry["Combinations"]) for entry in kaktovik_table]
+
+plt.bar(x, combinations_count, color=colors)
+plt.xlabel("Decimal Value")
+plt.ylabel("Number of Combinations")
+plt.title("Kaktovik Numeral Combinations")
+plt.xticks(x)
+plt.show()
+
+## Generate Table
+def decimal_to_binary(decimal):
+    return bin(decimal)[2:]
+
+def decimal_to_hex(decimal):
+    return hex(decimal)[2:]
+
+def decimal_to_octal(decimal):
+    return oct(decimal)[2:]
+
+def decimal_to_fraction(decimal):
+    from fractions import Fraction
+    return str(Fraction(decimal).limit_denominator())
+
+def decimal_to_kaktovik(decimal):
+    return decimal_to_base(decimal, 20)
+
+def decimal_to_base(decimal, base):
+    digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    result = ""
+    while decimal > 0:
+        result = digits[decimal % base] + result
+        decimal = decimal // base
+    return result
+
+def generate_combinations(kaktovik_numeral):
+    # Generate combinations for the current Kaktovik numeral
+    combinations = []
+    for i in range(20):
+        emoji_combination = f"{kaktovik_numeral} + {kaktovik_numeral} = {decimal_to_kaktovik(i + 2)}"
+        combinations.append(emoji_combination)
+    return combinations
+
+def generate_kaktovik_table():
+    kaktovik_unicode = ["𝋀", "𝋁", "𝋂", "𝋃", "𝋄", "𝋅", "𝋆", "𝋇", "𝋈", "𝋉", "𝋊", "𝋋", "𝋌", "𝋍", "𝋎", "𝋏", "𝋐", "𝋑", "𝋒", "𝋓"]
+    kaktovik_table = []
+
+    for i in range(20):
+        # Calculate the corresponding hexadecimal color code
+        color_ratio = i / 19
+        hex_code = format(int(color_ratio * 16777215), '06x')
+        rgb = hex_to_rgb(hex_code)
+
+        # Convert the decimal number to a Kaktovik numeral
+        kaktovik_numeral = kaktovik_unicode[i]
+
+        # Generate combinations for the current Kaktovik numeral
+        combinations = generate_combinations(kaktovik_numeral)
+
+        kaktovik_table.append({
+            "Decimal Value": i,
+            "Kaktovik Unicode": kaktovik_unicode[i],
+            "RGB Color": rgb,
+            "Combinations": combinations
+        })
+
+    return kaktovik_table
+
+# Generate the table
+table = generate_table()
+kaktovik_table = generate_kaktovik_table()
+
+# Print the main table
+print("| Meta Tag | Number | Unicode | Decimal | Alphabet | HEX Code | XY Plot | Emoji | Keyword | Binary | Hexadecimal | Octal | Fraction | Kaktovik |")
+print("|----------|--------|---------|---------|----------|----------|---------|-------|---------|--------|-------------|-------|----------|----------|")
+for row in table:
+    meta_tag = row[0]
+    number = row[1]
+    for entry in row[2:]:
+        unicode = entry['unicode']
+        decimal = entry['decimal']
+        alphabet = entry['alphabet']
+        hex_code = entry['hex_code']
+        xy_plot = entry['xy_plot']
+        emoji = entry['emoji']
+        keyword = entry['keyword']
+        binary = entry['binary']
+        hexadecimal = entry['hexadecimal']
+        octal = entry['octal']
+        fraction = entry['fraction']
+        kaktovik = entry['kaktovik']
+        print(f"| {meta_tag} | {number} | {unicode} | {decimal} | {alphabet} | {hex_code} | {xy_plot} | {emoji} | {keyword} | {binary} | {hexadecimal} | {octal} | {fraction} | {kaktovik} |")
+
+# Print the kaktovik table
+print("\nKaktovik Table:")
+print("| Decimal Value | Kaktovik Unicode | RGB Color | Combinations |")
+print("|---------------|------------------|-----------|--------------|")
+for entry in kaktovik_table:
+    decimal_value = entry["Decimal Value"]
+    kaktovik_unicode = entry["Kaktovik Unicode"]
+    rgb_color = entry["RGB Color"]
+    combinations = entry["Combinations"]
+    print(f"| {decimal_value} | {kaktovik_unicode} | {rgb_color} | {combinations} |")
+
+## Next Steps
+
+To determine the best approach for your specific goal, it would be helpful to have more details about the specific requirements and context of your project. Here are a few considerations that can guide you in finding the best way to use the Kaktovik encryption for your goal:
+
+1. Define your goal clearly: Understand what you want to achieve with the Kaktovik encryption. Are you trying to achieve secure data transmission, authentication, or confidentiality? Clarify your objectives to guide your implementation.
+
+2. Key generation and distribution: Determine how you will generate and distribute the Kaktovik encryption keys. You might consider using a secure key generation algorithm and establishing a secure key exchange mechanism to ensure the confidentiality and integrity of the keys.
+
+3. Encryption and decryption process: Design the encryption and decryption processes using the Kaktovik encryption algorithm. Determine how you will combine the Kaktovik key with the data you want to encrypt and decrypt. Consider any additional cryptographic operations or techniques you may need to incorporate to enhance security.
+
+4. Secure storage and transmission: Consider the security of the encrypted data during storage and transmission. Decide on appropriate measures to protect the encrypted data, such as using secure storage mechanisms, secure transmission protocols, and access controls.
+
+5. Integration with authentication systems: Determine how the Kaktovik encryption will integrate with authentication systems. Consider how the encrypted data will be used for authentication and how you will verify the authenticity and integrity of the encrypted data.
+
+6. Testing and validation: Thoroughly test and validate your implementation to ensure its security and reliability. Conduct penetration testing, vulnerability assessments, and code reviews to identify and address any potential security weaknesses.
+
+Keep in mind that security is a complex field, and designing a secure encryption system requires expertise and consideration of various factors. It is recommended to consult with a security professional or expert to assess your specific requirements and provide guidance tailored to your needs.
+## Key Test (No Data)
+
+To test the Kaktovik encryption in Python without adding more values or datasets, you can use the existing code and generate a sample encryption and decryption process. Here's an example:
+
+```python
+def kaktovik_encrypt(data, key):
+    encrypted_data = []
+    for i, value in enumerate(data):
+        encrypted_value = (value + key[i % len(key)]) % 20
+        encrypted_data.append(encrypted_value)
+    return encrypted_data
+
+def kaktovik_decrypt(encrypted_data, key):
+    decrypted_data = []
+    for i, value in enumerate(encrypted_data):
+        decrypted_value = (value - key[i % len(key)]) % 20
+        decrypted_data.append(decrypted_value)
+    return decrypted_data
+
+# Sample data and key
+data = [5, 12, 8, 17, 3]
+key = [7, 2, 10]
+
+# Encrypt the data
+encrypted_data = kaktovik_encrypt(data, key)
+print("Encrypted data:", encrypted_data)
+
+# Decrypt the data
+decrypted_data = kaktovik_decrypt(encrypted_data, key)
+print("Decrypted data:", decrypted_data)
+```
+
+In this example, `kaktovik_encrypt` and `kaktovik_decrypt` functions are defined to perform the encryption and decryption processes using the Kaktovik encryption algorithm. The sample data `data` is encrypted using the key `key` and then decrypted back to its original form.
+
+You can modify the sample data and key as needed to test different inputs and observe the encryption and decryption results.
+## Cross Entropy Research
+Cross-entropy is a concept commonly used in information theory and machine learning to measure the difference between two probability distributions or the performance of a classification model. It quantifies the average number of bits needed to encode or transmit an event from one distribution given another distribution.
+
+In the context of binary classification, where the predicted probabilities are compared to the true binary labels, the cross-entropy loss function is commonly used. It measures the dissimilarity between the predicted probabilities and the true labels. The formula for binary cross-entropy is:
+
+H(p, q) = -(p * log(q) + (1 - p) * log(1 - q))
+
+Where:
+- H(p, q) is the cross-entropy between the true probability p and the predicted probability q.
+- p is the true probability or label (0 or 1).
+- q is the predicted probability by the model.
+
+The cross-entropy loss function penalizes large differences between predicted and true probabilities, pushing the model to minimize the loss by adjusting its parameters.
+
+It's worth noting that the cross-entropy concept is not directly related to Kaktovik encryption or random number generation. It's a separate concept used in machine learning and information theory to measure the difference between probability distributions or evaluate the performance of models.
+
+
+The mathematical concepts and techniques discussed on this page may not directly support your goal of Kaktovik encryption or random number generation. However, some of the mathematical concepts, such as modular arithmetic, binary operations, and transformations, can be useful in cryptographic algorithms and random number generation techniques.
+
+For Kaktovik encryption, you would primarily rely on the principles and operations specific to the Kaktovik system you have designed, such as the generation of Kaktovik keys, encoding and decoding processes, and any additional encryption techniques you want to incorporate.
+
+Random number generation can benefit from mathematical concepts like probability distributions, statistical properties, and randomization algorithms. While the Kaktovik system itself may not directly align with traditional random number generation techniques, you can still utilize various mathematical operations and algorithms to generate random-like sequences within the context of the Kaktovik system.
+
+In summary, while the specific mathematical concepts discussed on this page may not directly align with Kaktovik encryption or random number generation, the broader mathematical principles and techniques can be applied and adapted to support your goals with appropriate modifications and considerations for the specific requirements of the Kaktovik system.
+## Math To Apply
+When it comes to cryptography and random number generation, there are several mathematical functions and concepts that you should be aware of. Here are some of the top ones:
+
+1. Modular arithmetic: This is the arithmetic on integers where the result "wraps around" after reaching a certain modulus. It is commonly used in encryption algorithms and key generation.
+
+2. Probability distributions: Understanding various probability distributions, such as uniform, normal (Gaussian), exponential, etc., can help in generating random numbers with desired statistical properties.
+
+3. Cryptographic hash functions: These are mathematical functions that take an input and produce a fixed-size output, known as a hash. They are used for data integrity checks and password hashing.
+
+4. Prime numbers: Prime numbers play a crucial role in many cryptographic algorithms, such as RSA. They are used in key generation and factorization-based encryption schemes.
+
+5. Modular inverse: The modular inverse of a number is another number that, when multiplied by the original number modulo a certain value, produces a result of 1. It is used in encryption algorithms, such as RSA, to compute private keys.
+
+6. Discrete logarithm problem: This problem forms the basis of various asymmetric cryptographic algorithms, such as Diffie-Hellman and elliptic curve cryptography. It involves finding the exponent of a given base that produces a specified result modulo a prime number.
+
+7. Number theory: Concepts from number theory, such as Euler's totient function, Chinese remainder theorem, and Fermat's little theorem, are often utilized in cryptographic algorithms.
+
+8. Boolean algebra: Boolean algebra deals with logical operations and binary values (0 and 1). It is essential in designing encryption algorithms and logical operations used in cryptographic protocols.
+
+These are just a few of the mathematical functions and concepts relevant to cryptography and random number generation. Depending on your specific goals and requirements, you may need to explore additional mathematical concepts and algorithms.
+## 3d Lossless Rotating 2FA .TOV Key
+When it comes to cryptography and random number generation, there are several mathematical functions and concepts that you should be aware of. Here are some of the top ones:
+
+1. Modular arithmetic: This is the arithmetic on integers where the result "wraps around" after reaching a certain modulus. It is commonly used in encryption algorithms and key generation.
+
+2. Probability distributions: Understanding various probability distributions, such as uniform, normal (Gaussian), exponential, etc., can help in generating random numbers with desired statistical properties.
+
+3. Cryptographic hash functions: These are mathematical functions that take an input and produce a fixed-size output, known as a hash. They are used for data integrity checks and password hashing.
+
+4. Prime numbers: Prime numbers play a crucial role in many cryptographic algorithms, such as RSA. They are used in key generation and factorization-based encryption schemes.
+
+5. Modular inverse: The modular inverse of a number is another number that, when multiplied by the original number modulo a certain value, produces a result of 1. It is used in encryption algorithms, such as RSA, to compute private keys.
+
+6. Discrete logarithm problem: This problem forms the basis of various asymmetric cryptographic algorithms, such as Diffie-Hellman and elliptic curve cryptography. It involves finding the exponent of a given base that produces a specified result modulo a prime number.
+
+7. Number theory: Concepts from number theory, such as Euler's totient function, Chinese remainder theorem, and Fermat's little theorem, are often utilized in cryptographic algorithms.
+
+8. Boolean algebra: Boolean algebra deals with logical operations and binary values (0 and 1). It is essential in designing encryption algorithms and logical operations used in cryptographic protocols.
+
+Modular arithmetic provides a framework for performing arithmetic operations on integers that "wrap around" after reaching a certain modulus. This concept can be applied in various algorithms, including cryptography. Here are a few examples of how modular arithmetic can be used:
+
+1. Cryptographic algorithms: Many encryption and decryption algorithms, such as RSA and Diffie-Hellman, utilize modular arithmetic extensively. The modulus is typically a large prime number, and operations like exponentiation, multiplication, and inversion are performed modulo the modulus to ensure the security and efficiency of the algorithm.
+
+2. Hash functions: Cryptographic hash functions, like SHA-256, use modular arithmetic operations to transform input data into fixed-size hash values. Modular addition, bitwise operations, and other arithmetic operations are employed in the internal computations of hash functions.
+
+3. Random number generation: In cryptographic applications, generating random numbers within a specific range is often required. Modular arithmetic can be used to obtain random numbers modulo a desired range, ensuring the generated numbers fall within the desired bounds.
+
+4. Error detection and correction: Modular arithmetic is used in error detection and correction codes, such as cyclic redundancy check (CRC). Modulo operations are performed on data blocks to generate check values that can detect and correct errors during transmission or storage.
+
+These are just a few examples of how modular arithmetic can be applied in algorithms. The specific implementation and usage depend on the requirements and goals of the algorithm you are developing.
+## FHIR Standardizing
+FHIR (Fast Healthcare Interoperability Resources) is a standard for exchanging healthcare information electronically. It focuses on data interoperability and provides a framework for sharing and managing healthcare data in a standardized format.
+
+When it comes to encryption algorithms, it's important to prioritize established and well-vetted cryptographic algorithms that have undergone extensive analysis and scrutiny. Developing a new encryption algorithm from scratch is highly discouraged, as it can introduce security vulnerabilities and weaknesses.
+
+Instead, it is recommended to use widely accepted encryption algorithms such as AES (Advanced Encryption Standard) or RSA (Rivest-Shamir-Adleman). These algorithms have been extensively studied and have proven security properties.
+
+If you have specific requirements or constraints that necessitate the development of a new encryption algorithm, it is crucial to consult with experienced cryptographers and security professionals. They can help ensure that the algorithm undergoes thorough analysis, review, and testing to identify any potential weaknesses or vulnerabilities.
+
+Remember, encryption is a critical component of securing sensitive data, and it should be approached with caution and expertise to maintain the confidentiality and integrity of the information being protected.## $ py
+def generate_table():
+    table = []
+    limit = 20
+    current_value = 0x1D2C0  # Starting Unicode value
+
+    for i in range(limit):
+        meta_tag = hex(0x1D2C0 + i * 0x100).upper()  # Calculate the meta tag based on the formula
+        number = '#' + str(i)  # Generate the corresponding number
+
+        row = [meta_tag, number]
+        for j in range(limit):
+            unicode = chr(current_value)  # Calculate the corresponding Unicode
+            kactovic_pair = hex(current_value + 1)[2:].upper()  # Calculate the corresponding Kactovic added pair
+            current_value += 2
+
+            # Generate the Kaktovik math results
+            kaktovik_decimal = j + 1
+            kaktovik_hex = hex(kaktovik_decimal)[2:]
+            x = -240 + (j * 30)
+            y = 107 - (j * 12)
+
+            row.append(f"{unicode} (+{kaktovik_decimal}) {kactovic_pair} ({kaktovik_decimal} - {kaktovik_hex} - {x}, {y})")
+
+        table.append(row)  # Add the values to the table
+
+    return table
+
+# Generate the table
+table = generate_table()
+
+# Print the table
+print("| Meta Tag | Number | Visual Math | Kactovic Tree |")
+print("|----------|--------|-------------|---------------|")
+for row in table:
+    print("|", " | ".join(row), "|")
+
+## $meta
+$meta-tag: (
+  0: "Query",
+  1: "Result",
+  2: "Value",
+  3: "Count",
+  4: "Increment",
+  5: "Meta",
+  6: "Tag",
+  7: "Number",
+  8: "Limit",
+  9: "Range",
+  10: "Syntax",
+  11: "Dictionary",
+  12: "Column",
+  13: "Row",
+  14: "Code",
+  15: "Snippet",
+  16: "Format",
+  17: "Populate",
+  18: "XLS"
+);
+
+@each $index, $value in $meta-tag {
+  $number-value: map-get($number, $index);
+  $visual-math-value: map-get($visual-math, $index);
+  
+  .row-#{$index + 1} {
+    meta-tag: $value;
+    number: $number-value;
+    visual-math: $visual-math-value;
+  }
+}
+$meta-tag: (
+  0: "Query",
+  1: "Result",
+  2: "Value",
+  3: "Count",
+  4: "Increment",
+  5: "Meta",
+  6: "Tag",
+  7: "Number",
+  8: "Limit",
+  9: "Range",
+  10: "Syntax",
+  11: "Dictionary",
+  12: "Column",
+  13: "Row",
+  14: "Code",
+  15: "Snippet",
+  16: "Format",
+  17: "Populate",
+  18: "XLS"
+);
+
+$unicode: (
+  0: "U+0041",
+  1: "U+0042",
+  2: "U+0043",
+  3: "U+0044",
+  4: "U+0045",
+  5: "U+0046",
+  6: "U+0047",
+  7: "U+0048",
+  8: "U+0049",
+  9: "U+004A",
+  10: "U+004B",
+  11: "U+004C",
+  12: "U+004D",
+  13: "U+004E",
+  14: "U+004F",
+  15: "U+0050",
+  16: "U+0051",
+  17: "U+0052",
+  18: "U+0053"
+);
+
+$decimal: (
+  0: 65,
+  1: 66,
+  2: 67,
+  3: 68,
+  4: 69,
+  5: 70,
+  6: 71,
+  7: 72,
+  8: 73,
+  9: 74,
+  10: 75,
+  11: 76,
+  12: 77,
+  13: 78,
+  14: 79,
+  15: 80,
+  16: 81,
+  17: 82,
+  18: 83
+);
+
+$alphabet: (
+  0: "A",
+  1: "B",
+  2: "C",
+  3: "D",
+  4: "E",
+  5: "F",
+  6: "G",
+  7: "H",
+  8: "I",
+  9: "J",
+  10: "K",
+  11: "L",
+  12: "M",
+  13: "N",
+  14: "O",
+  15: "P",
+  16: "Q",
+  17: "R",
+  18: "S"
+);
+
+$hex-code: (
+  0: "41",
+  1: "42",
+  2: "43",
+  3: "44",
+  4: "45",
+  5: "46",
+  6: "47",
+  7: "48",
+  8: "49",
+  9: "4A",
+  10: "4B",
+  11: "4C",
+  12: "4D",
+  13: "4E",
+  14: "4F",
+  15: "50",
+  16: "51",
+  17: "52",
+  18: "53"
+);
+
+$xy-plot: (
+  0: "(x1, y1)",
+  1: "(x2, y2)",
+  2: "(x3, y3)",
+  3: "(x4, y4)",
+  4: "(x5, y5)",
+  5: "(x6, y6)",
+  6: "(x7, y7)",
+  7: "(x8, y8)",
+  8: "(x9, y9)",
+  9: "(x10, y10)",
+  10: "(x11, y11)",
+  11: "(x12, y12)",
+  12: "(x13, y13)",
+  13: "(x14, y14)",
+  14: "(x15, y15)",
+  15: "(x16, y16)",
+  16: "(x17, y17)",
+  17: "(x18, y18)",
+  18: "(x19, y19)"
+);
+
+@each $index, $value in $meta-tag {
+  $unicode-value: map-get($unicode, $index);
+  $decimal-value: map-get($decimal, $index);
+  $alphabet-value: map-get($alphabet, $index);
+  $hex-code-value: map-get($hex-code, $index);
+  $xy-plot-value: map-get($xy-plot, $index);
+
+  .row-#{$index + 1} {
+    meta-tag: $value;
+    unicode: $unicode-value;
+    decimal: $decimal-value;
+    alphabet: $alphabet-value;
+    hex-code: $hex-code-value;
+    xy-plot: $xy-plot-value;
+  }
+}
+$emojicodec: (
+  0: "U+1F600",
+  1: "U+1F601",
+  2: "U+1F602",
+  3: "U+1F603",
+  4: "U+1F604",
+  5: "U+1F605",
+  6: "U+1F606",
+  7: "U+1F607",
+  8: "U+1F608",
+  9: "U+1F609",
+  10: "U+1F60A",
+  11: "U+1F60B",
+  12: "U+1F60C",
+  13: "U+1F60D",
+  14: "U+1F60E",
+  15: "U+1F60F",
+  16: "U+1F610",
+  17: "U+1F611",
+  18: "U+1F612",
+  19: "U+1F613"
+);
+
+@each $index, $value in $meta-tag {
+  $unicode-value: map-get($unicode, $index);
+  $decimal-value: map-get($decimal, $index);
+  $alphabet-value: map-get($alphabet, $index);
+  $hex-code-value: map-get($hex-code, $index);
+  $xy-plot-value: map-get($xy-plot, $index);
+  $emojicodec-value: map-get($emojicodec, $index);
+
+  .row-#{$index + 1} {
+    meta-tag: $value;
+    unicode: $unicode-value;
+    decimal: $decimal-value;
+    alphabet: $alphabet-value;
+    hex-code: $hex-code-value;
+    xy-plot: $xy-plot-value;
+    emojicodec: $emojicodec-value;
+  }
+}
+$meta-tag: (
+  0: "U+000000",
+  1: "U+0CCCCCC",
+  2: "U+199998",
+  3: "U+266664",
+  4: "U+333330",
+  5: "U+400000",
+  6: "U+4CCCCE",
+  7: "U+59999C",
+  8: "U+666668",
+  9: "U+733334",
+  10: "U+800000",
+  11: "U+8CCCCC",
+  12: "U+999998",
+  13: "U+A66664",
+  14: "U+B33330",
+  15: "U+C00000",
+  16: "U+CCCCCE",
+  17: "U+D9999C",
+  18: "U+E66668",
+  19: "U+F33334"
+);
+
+$number: (
+  0: "#0",
+  1: "#1",
+  2: "#2",
+  3: "#3",
+  4: "#4",
+  5: "#5",
+  6: "#6",
+  7: "#7",
+  8: "#8",
+  9: "#9",
+  10: "#10",
+  11: "#11",
+  12: "#12",
+  13: "#13",
+  14: "#14",
+  15: "#15",
+  16: "#16",
+  17: "#17",
+  18: "#18",
+  19: "#19"
+);
+
+$visual-math: (
+  0: "A (+1) 𝋀 (+1) (-240, 107)",
+  1: "B (+2) 𝋁 (+2) (-210, 95)",
+  2: "C (+3) 𝋂 (+3) (-180, 83)",
+  3: "D (+4) 𝋃 (+4) (-150, 71)",
+  4: "E (+5) 𝋄 (+5) (-120, 59)",
+  5: "F (+6) 𝋅 (+6) (-90, 47)",
+  6: "G (+7) 𝋆 (+7) (-60, 35)",
+  7: "H (+8) 𝋇 (+8) (-30, 23)",
+  8: "I (+9) 𝋈 (+9) (0, 11)",
+  9: "J (+10) 𝋉 (+A) (30, -1)",
+  10: "K (+11) 𝋊 (+B) (60, -13)",
+  11: "L (+12) 𝋋 (+C) (90, -25)",
+  12: "M (+13) 𝋌 (+D) (120, -37)",
+  13: "N (+14) 𝋍 (+E) (150, -49)",
+  14: "O (+15) 𝋎 (+F) (180, -61)",
+  15: "P (+16) 𝋏 (+10) (210, -73)",
+  16: "Q (+17) 𝋐 (+11) (240, -85)",
+  17: "R (+18) 𝋑 (+12) (-240, -97)",
+  18: "S (+19) 𝋒 (+13) (-210, -109)",
+  19: "T (+14) 𝋓 (+14) (-180, -121)"
+);
+
+@each $index, $value in $meta-tag {
+  $number-value: map-get($number, $index);
+  $visual-math-value: map-get($visual-math, $index);
+  
+  .row-#{$index + 1} {
+    meta-tag: $value;
+    number: $number-value;
+    visual-math: $visual-math-value;
+  }
+}
+
+## Segmenting Hex into XY Plot
+def generate_table():
+    table = []
+    limit = 20
+    current_value = 0x000000  # Starting HEX code value
+
+    for i in range(limit):
+        meta_tag = hex(current_value).upper()  # Calculate the meta tag based on the current HEX code
+        number = '#' + str(i)  # Generate the corresponding number
+
+        row = [meta_tag, number]
+        for j in range(limit):
+            unicode = chr(0x1D2C0 + i)  # Calculate the corresponding Unicode
+            kactovic_pair = hex(0x1D2C0 + i + 1)[2:].upper()  # Calculate the corresponding Kactovic added pair
+
+            # Generate the Kaktovik math results
+            kaktovik_decimal = j + 1
+            kaktovik_hex = hex(kaktovik_decimal)[2:]
+            x = -240 + (j * 30)
+            y = 107 - (j * 12)
+
+            row.append(f"{unicode} (+{kaktovik_decimal}) {kactovic_pair} ({kaktovik_decimal} - {kaktovik_hex} - {x}, {y})")
+
+        table.append(row)  # Add the values to the table
+        current_value += 0x0CCCCCC  # Increment the HEX code value by 1/19th of the total range
+
+    return table
+
+# Generate the table
+table = generate_table()
+
+# Print the table
+print("| Meta Tag | Number | Visual Math | Kactovic Tree |")
+print("|----------|--------|-------------|---------------|")
+for row in table:
+    print("|", " | ".join(row), "|")
+
+## Plot Values  (incomplete)
+
+n   Unicode   Decimal   Alphabet   HEX Code    XY Plot
+0   U+0041    65        A          41          (x1, y1)
+1   U+0042    66        B          42          (x2, y2)
+2   U+0043    67        C          43          (x3, y3)
+3   U+0044    68        D          44          (x4, y4)
+4   U+0045    69        E          45          (x5, y5)
+5   U+0046    70        F          46          (x6, y6)
+6   U+0047    71        G          47          (x7, y7)
+7   U+0048    72        H          48          (x8, y8)
+8   U+0049    73        I          49          (x9, y9)
+9   U+004A    74        J          4A          (x10, y10)
+10  U+004B    75        K          4B          (x11, y11)
+11  U+004C    76        L          4C          (x12, y12)
+12  U+004D    77        M          4D          (x13, y13)
+13  U+004E   
+
+## Kaktovis Tree (How to merge with main...idk)
+
+def generate_table():
+    table = []
+    limit = 20
+    current_value = 0x1D2C0  # Starting Unicode value
+
+    for i in range(limit):
+        meta_tag = hex(0x1D2C0 + i).upper()  # Calculate the meta tag based on the incremental formula
+        number = '#' + str(i)  # Generate the corresponding number
+
+        row = [meta_tag, number]
+        for j in range(limit):
+            unicode = chr(current_value)  # Calculate the corresponding Unicode
+            kactovic_pair = hex(current_value + 1)[2:].upper()  # Calculate the corresponding Kactovic added pair
+            current_value += 2
+
+            # Generate the Kaktovik math results
+            kaktovik_decimal = j + 1
+            kaktovik_hex = hex(kaktovik_decimal)[2:]
+            x = -240 + (j * 30)
+            y = 107 - (j * 12)
+
+            row.append(f"{unicode} (+{kaktovik_decimal}) {kactovic_pair} ({kaktovik_decimal} - {kaktovik_hex} - {x}, {y})")
+
+        table.append(row)  # Add the values to the table
+
+    return table
+
+# Generate the table
+table = generate_table()
+
+# Print the table
+print("| Meta Tag | Number | Visual Math | Kactovic Tree |")
+print("|----------|--------|-------------|---------------|")
+for row in table:
+    print("|", " | ".join(row), "|")
+n    n×203    n×202    n×201    n×200    n×20-1    n×20-2    n×20-3
+0    1D2C0    1D2E6    1D310    1D33A    1D347    1D358     1D36A      1D37C
+1    1D2C2    1D2E8    1D312    1D33C    1D349    1D35A     1D36C      1D37E
+2    1D2C4    1D2EA    1D314    1D33E    1D34B    1D35C     1D36E      1D380
+3    1D2C6    1D2EC    1D316    1D340    1D34D    1D35E     1D370      1D382
+4    1D2C8    1D2EE    1D318    1D342    1D34F    1D360     1D372      1D384
+5    1D2CA    1D2F0    1D31A    1D344    1D351    1D362     1D374      1D386
+6    1D2CC    1D2F2    1D31C    1D346    1D353    1D364     1D376      1D388
+7    1D2CE    1D2F4    1D31E    1D348    1D355    1D366     1D378      1D38A
+8    1D2D0    1D2F6    1D320    1D34A    1D357    1D368     1D37A      1D38C
+9    1D2D2    1D2F8    1D322    1D34C    1D359    1D36A     1D37C      1D38E
+10   1D2D4    1D2FA    1D324    1D34E    1D35B    1D36C     1D37E      1D390
+11   1D2D6    1D2FC    1D326    1D350    1D35D    1D36E     1D380      1D392
+12   1D2D8    1D2FE    1D328    1D352    1D35F    1D370     1D382      1D394
+13   1D2DA    1D300    1D32A    1D354    1D361    1D372     1D384      1D396
+14   1D2DC    1D302    1D32C    1D356    1D363    1D374     1D386      1D398
+15   1D2DE    1D304    1D32E    1D358    1D365    1D376     1D388      1D39A
+16   1D2E0    1D306    1D330    1D35A    1D367    1D378     1D38A      1D39C
+17   1D2E2    1D308    1D332    1D35C    1D369    1D37A     1D38C      1D39E
+18   1D2E4    1D30A    1D334    1D35E    1D36B    1D37C     1D38E      1D3A0
+19   1D2E6    1D30C    1D336    1D360    1D36D    1D37E     1D390      1D3A2
+
+## Py Trouble
+
+Yu can copy the entire script I provided earlier and run it in a Python environment on your local machine. Make sure you have the necessary libraries (such as matplotlib and numpy) installed in your Python environment before running the script.
+
+To run the script, follow these steps:
+1. Copy the entire code from the previous response.
+2. Open a text editor or an integrated development environment (IDE) that supports Python.
+3. Create a new Python file and paste the copied code into the file.
+4. Save the file with a .py extension (e.g., encoding_script.py).
+5. Open a terminal or command prompt.
+6. Navigate to the directory where you saved the Python file using the `cd` command.
+7. Run the script by executing the command `python encoding_script.py` (replace "encoding_script.py" with the actual filename if you named it differently).
+
+The script should execute and display the input text, encoded text, decoded text, and the plot of the Kaktovik table. If there are any errors or issues, make sure you have the required libraries installed and properly configured in your Python environment.
+
+Let me know if you encounter any difficulties or if you have any further questions!
+## Acknowledgements
+
+ - [Awesome Readme Templates](https://awesomeopensource.com/project/elangosundar/awesome-README-templates)
+ - [Awesome README](https://github.com/matiassingers/awesome-readme)
+ - [How to write a Good readme](https://bulldogjob.com/news/449-how-to-write-a-good-readme-for-your-github-project)
+
