@@ -1,0 +1,112 @@
+
+
+## Predecessors
+
+[PROGRAMMING FOR BABYLONIAN, MAYAN, INUIT (KAKTOVIK INUPIAQ), AND LARGE ROMAN NUMERALS](https://www.nickpisca.com/sherpa/?p=539)
+
+Posted by Nicholas Pisca | Aug 16, 2015 | C#, Digital, Fabrication, MEL, Rendering, Representation, Scripting, Translators | 0 
+
+
+https://www.nickpisca.com/sherpa/wp-content/uploads/2015/11/20151112_XMLCTDImporter09.jpg
+
+Ancient or uncommon number systems can be a fun, but tricky to work with when coding.  Maybe I can show you some of my tricks when I programmed the Mega-Dots connect-the-dots puzzles.
+
+Almost from the start, I ran into annoying problems.  I really tried to use the expanded Windows characters.  I downloaded the standard Babylonian character types and installed them as they directed.  However, whenever I tried to use them in any application other than WordPad or Microsoft Word, the characters appeared as blank.  Maybe there is a trick to getting them to render in CATIA, Illustrator, and/or Photoshop, (or any web browser), but rather than wasting any more time on that R&D, I figured just designing my own font would be the best course of action.
+
+The advantages of making my own number font were enormous.  First, in CATIA, when you employ text tags, you need to establish a catalog of fonts and sizes that you anticipate your client (in this case, me) to use.  You cannot just insert a tag on a dot, and then retroactively adjust the size and type.
+
+Inuit Numbers Mega-Dots Puzzle. 2015 0001D LLC
+Inuit Numbers Mega-Dots Puzzle. 2015 0001D LLC
+
+Basically, once you automate the CATIA tag, you must design the font type and size at the point of creation, because modifying these things later is not impossible, but doing it on 6227 tags is effectively impossible.  The advantage of using one font to contain not just all my Babylonian numbers, but all the numbers means that I can drop a tag at the appropriate size and modify the text accordingly, without having to jump font types.  The second advantage would be that I would require only one array of font sizes in the drafting catalog, and not one for each esoteric font types.  This would make the random number puzzle very easy to program in the drafting API’s.  Thirdly, once the user’s catalog and related files are updated on that session of CATIA, these esoteric character options literally appear in the pulldown in 3D, assuming the user would ever want to do this manually.  Ideally, I would prefer to batch process this, and due to these font changes, the API’s are very amenable to this.  Fourth, making my own fonts allows me to avoid any possible copyright issues.  Fifth, making my own fonts allows me to fine-tune the shapes and poche of each character, to ensure the greatest possible legibility in the smallest possible size.  Ultimately, these puzzles will contains thousands and possibly tens-of-thousands of dots and tags; having the smallest text will allow me to push the format to the maximum.
+
+Screenshot of the Type Light 3.2 Application, showing my version of the number 9 in Babylonian.
+Screenshot of the Type Light 3.2 Application, showing my version of the number 9 in Babylonian.
+
+After a quick search of font editing software, and thanks to Kristi Gehring who recommended this, I elected to learn the program named “Type Light 3.2.”  This program is free, and it is super easy to learn. It is similar to Illustrator because the application requires vector line manipulation.  Within a few days, I had completed the entire numeral library.
+
+The beautiful thing about constructing my own font is, all the number are represented with simple alphanumeric characters.  You don’t need to set up a convoluted CHR() array that references an obscure set of numbers way off the beaten font map.  This comes in handy further down the road.
+
+All numeral types randomized on a sheet. 0001D LLC 2015
+All numeral types randomized on a sheet. 0001D LLC 2015
+
+Also, Type Light allows a user to manipulate and/or augment an existing free font.  This is how I developed the extended characters for the larger Roman numeral library.  For this article, rather than redundantly post all subroutines for each number type, I’ll work with the Roman numerals since these are the probably the easiest to pick up.
+
+I’ve posted the Roman Numeral Long conversion subroutine to my Blast Blog.   Here is a copy of it as well:
+
+Code:
+static string ConvertRomanNum(long InputNum)
+{
+//0001D LLC 2015 Nick Pisca
+//long InputNum = 234;
+string[,] RNs = new string[,] {
+{"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"},
+{"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"},
+{"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"},
+{"", "M", "MM", "MMM", "Mv", "v", "vM", "vMM", "vMMM", "Mx" },
+{"", "x", "xx", "xxx", "xl", "l", "lx", "lxx", "lxxx", "xc" }};
+var intArr = InputNum.ToString().Reverse().ToArray();
+int len = intArr.Count();
+string RN = "";
+int i = len;
+while (i-- > 0)
+{
+RN += RNs[i,Int32.Parse(intArr[i].ToString())];
+}
+return RN;
+}
+Future version of Mega-Dots that randomizes the puzzle by base number. 2015 0001D LLC
+Future version of Mega-Dots that randomizes the puzzle by base number. 2015 0001D LLC
+
+This is based on a common subroutine found on the net everywhere.  The only think I changed was the construct  matrix and ported to C#.  Typically, most people are not coding for numbers greater than 4000, the point at which characters change from the typical English alphabet to overlined characters.
+
+My overlined characters are actually represented by their respective lower case counterpart.  I figured I wouldn’t be using the lower case ever, so this could be an easy way to keep control over my font.  Since Roman numerals are an odd set, they somewhat don’t correspond to the base x number sets.
+
+Basically, almost all other numbers can be expressed by converting them into their base radix and corresponding characters in the custom font.  Here’s another subroutine that I borrowed and slightly modified the character set (to aide in clarity for the game user), that allows me to input any whole number and find its counterpart of any base from 2 to 64. (For my uses, I only need it to reach 36.)
+
+Code:
+public static string DecimalToBase(long Num, long Base)
+{
+const int BitsInLong = 64;
+const string Chars = "0123456789abcdefghijkLmnopqrstuvwxyz";
+if (Base < 2 || Base > Chars.Length)
+{
+throw new ArgumentException("The base must be >= 2 and <= " + Chars.Length.ToString());
+}
+if (Num == 0)
+{
+return "0";
+}
+int index = BitsInLong - 1;
+long currentNum = Math.Abs(Num);
+char[] charArr = new char[BitsInLong];
+while (currentNum != 0)
+{
+int rem = (int)(currentNum % Base);
+charArr[index--] = Chars[rem];
+currentNum = currentNum / Base;
+}
+string result = new string(charArr, index + 1, BitsInLong - index - 1);
+if (Num < 0)
+{
+result = "-" + result;
+}
+return result;
+}
+0001D's suggestion to learn the sequence of various numeral types. 2015
+0001D’s suggestion to learn the sequence of various numeral types. 2015
+
+This subroutine will give us any alphanumeric number at any base from 2 to 36.  The exact same code can be written for Babylonian, Mayan, Chinese Rod, and Inuit numbers, and all you have to do is change the Chars variable to the corresponding numbers in order.  Naturally, it will depend on how you ordered your font.  Since each person’s custom font is different, you’ll have to structure it accordingly.  The Babylonian, Mayan, Inuit, and Chinese Rod subroutines are a bit simpler, because by default, you know that those numeral systems have bases 60, 20, 20, and 10 respectively.  If you really wanted to be a Jedi, you could make all of them into one giant subroutine, with an argument to specify the desired alphabet, but I decided to isolate each type into their own sub.
+
+There are a few downsides to this implementation.  Notably, it is not very portable.  Without installing the font first, this would lead to several errors and silliness.  Also, there are odd printing issues with a custom font, and sometimes this leads to issues for saving as PDF without embedding the custom font.  Also, in programs like CATIA, there are no exposed PDF embedding options, so you MUST make sure the destination computer has the font already installed.  If you deal with a manufacturer that requires an embedded setup, say like Lulu Publishing, then you could be S.O.L.  One of the ways I circumvented this was to “convert objects to outlines” in Illustrator, but that lead to massive file size issues.  In the Mega-Dots Full Babylonian Puzzle (not out on the market yet), I had to somehow transfer tens-of-thousands of profiles from one sheet to a titleblock sheet.  Sadly, it took several transfers to accomplish with incessant crashing.
+
+Regardless, this solution of custom font libraries worked marvelously for the line of Mega-Dots, World’s Toughest Connect-The-Dots.  I’m already working on new variations of the puzzle, and adding even more numeral systems.
+
+20151112_XMLCTDImporter04
+
+SHARE: 
+PREVIOUS[0001D] Mega-Dots Automated Name DistributionNEXT[0001D] Automated Mega-Dots Tag and Leader Optimization
+ABOUT THE AUTHOR
+Nicholas Pisca
+Nicholas Pisca
+Nicholas Pisca: Founder 0001d LLC; Former Technical Manager Gehry Technologies; Former Lecturer/Adviser/Faculty UCSB MAT/USC/SCIarc; Author YSYT; Editor 0001d BLAST;
